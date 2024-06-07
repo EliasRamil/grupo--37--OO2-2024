@@ -1,5 +1,6 @@
 package com.unla.grupo37.controladores;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import com.unla.grupo37.dtos.DegreeDTO;
 import com.unla.grupo37.servicios.IDegreeServicio;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/degrees")
 public class DegreeControlador {
 	private IDegreeServicio dS;

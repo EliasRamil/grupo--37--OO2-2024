@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo37.entidades.RolDeUsuario;
+import com.unla.grupo37.entidades.Usuario;
 import com.unla.grupo37.repositorios.IUsuarioRepositorio;
 
 @Service("usuarioServicio")
@@ -26,11 +27,11 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String nombreDeUsuario) throws UsernameNotFoundException {
-		com.unla.grupo37.entidades.Usuario u= uR.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(nombreDeUsuario);
+		Usuario u= uR.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(nombreDeUsuario);
 		return construirUsuario(u, construirAutoridadesConcedidas(u.getRolesDeUsuario()));
 	}
 
-	private User construirUsuario(com.unla.grupo37.entidades.Usuario u, List<GrantedAuthority> grantedAuthorities) {
+	private User construirUsuario(Usuario u, List<GrantedAuthority> grantedAuthorities) {
 		return new User(u.getNombreDeUsuario(), u.getClave(), u.isActivada(),
 						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
 						grantedAuthorities);

@@ -1,5 +1,7 @@
 package com.unla.grupo37.controladores;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +15,15 @@ import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 @Controller
 @RequestMapping("/")
 public class HomeControlador {
-
+	
+	//GET Example: SERVER/index
 	@GetMapping("/index")
-	public String index() {
-		return AyudanteRutasVistas.INDEX;
+	public ModelAndView index() {
+		ModelAndView modelAndView = new ModelAndView(AyudanteRutasVistas.INDEX);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		modelAndView.addObject("username", user.getUsername());
+		//modelAndView.addObject("persons", personService.getAll());
+		return modelAndView;
 	}
 	
 	//redirecciona a index si se busca una url vacia
