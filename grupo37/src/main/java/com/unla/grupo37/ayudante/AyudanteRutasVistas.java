@@ -11,6 +11,10 @@ public class AyudanteRutasVistas {
 	public final static String DEGREE_FORM = "degree/form";
 	public final static String DEGREE_NEW = "degree/new";
 	
+	//USUARIO
+	public final static String USER_LOGIN = "user/login";
+	public final static String USER_LOGOUT = "user/logout";
+	
 	//REDIRECCIONAR:
 	public final static String ROUTE_INDEX = "/index";
 	public final static String DEGREE_ROOT = "/degrees/";
