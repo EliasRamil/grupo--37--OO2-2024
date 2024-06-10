@@ -112,4 +112,17 @@ public class Usuario {
 		this.rolesDeUsuario = rolesDeUsuario;
 	}
 	
+	
+	
+	public boolean esAdmin() {
+		boolean soyAdmin = false;
+		for (RolDeUsuario rol : rolesDeUsuario) {
+			if (rol.getRol() == "Admin") {soyAdmin = true; break;}
+			// TODO usar string de administrador correcto despues
+		}
+		return soyAdmin;
+	}
+	
+	
+	
 }
