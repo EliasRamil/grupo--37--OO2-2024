@@ -5,13 +5,9 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.unla.grupo37.dtos.DegreeDTO;
 import com.unla.grupo37.dtos.ProductoDTO;
-import com.unla.grupo37.entidades.Degree;
 import com.unla.grupo37.entidades.Producto;
-import com.unla.grupo37.repositorios.IDegreeRepositorio;
 import com.unla.grupo37.repositorios.IProductoRepositorio;
-import com.unla.grupo37.servicios.IDegreeServicio;
 import com.unla.grupo37.servicios.IProductoServicio;
 
 @Service("productoServicio")

@@ -1,7 +1,5 @@
 package com.unla.grupo37.dtos;
 
-import jakarta.persistence.Column;
-
 public class ProductoDTO {
 	private int id;
 	private String nombre;
