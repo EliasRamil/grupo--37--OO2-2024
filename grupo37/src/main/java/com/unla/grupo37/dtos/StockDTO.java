@@ -2,18 +2,18 @@ package com.unla.grupo37.dtos;
 
 public class StockDTO {
 	private long id;
-	
 	private int cantidadActual;
 	private int cantidadCritica;
-	private ProductoDTO producto;
+	private long productoId;
 	
 	public StockDTO() {}
 
-	public StockDTO(int cantidadActual, int cantidadCritica, ProductoDTO producto) {
+	public StockDTO(long id, int cantidadActual, int cantidadCritica, long productoId) {
 		super();
+		this.id = id;
 		this.cantidadActual = cantidadActual;
 		this.cantidadCritica = cantidadCritica;
-		this.producto = producto;
+		this.productoId = productoId;
 	}
 
 	public long getId() {
@@ -40,12 +40,12 @@ public class StockDTO {
 		this.cantidadCritica = cantidadCritica;
 	}
 
-	public ProductoDTO getProducto() {
-		return producto;
+	public long getProductoId() {
+		return productoId;
 	}
 
-	public void setProducto(ProductoDTO producto) {
-		this.producto = producto;
+	public void setProductoId(long productoId) {
+		this.productoId = productoId;
 	}
 	
 }

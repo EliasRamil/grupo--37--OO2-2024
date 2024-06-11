@@ -2,6 +2,8 @@ package com.unla.grupo37.entidades;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +20,9 @@ public class Compra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@CreationTimestamp
 	private LocalDateTime fechaCompra;
+	
 	private int cantidadComprada;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -31,9 +35,8 @@ public class Compra {
 
 	public Compra() {}
 
-	public Compra(LocalDateTime fechaCompra, int cantidadComprada, Producto producto, Usuario cliente) {
+	public Compra(int cantidadComprada, Producto producto, Usuario cliente) {
 		super();
-		this.fechaCompra = fechaCompra;
 		this.cantidadComprada = cantidadComprada;
 		this.producto = producto;
 		this.cliente = cliente;

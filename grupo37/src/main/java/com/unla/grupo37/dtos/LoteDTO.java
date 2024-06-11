@@ -2,29 +2,25 @@ package com.unla.grupo37.dtos;
 
 import java.time.LocalDateTime;
 
-import com.unla.grupo37.entidades.Producto;
-
 public class LoteDTO {
 	private long id;
-	
 	private LocalDateTime fechaRecepcion;
 	private double precioProducto;
 	private int cantidadRecibida;
-	
-	private PedidoDTO pedido;
-	
-    private Producto producto;
+	private long pedidoId;
+    private long productoId;
 	
 	public LoteDTO() {}
 
-	public LoteDTO(LocalDateTime fechaRecepcion, double precioProducto, int cantidadRecibida, PedidoDTO pedido,
-			Producto producto) {
+	public LoteDTO(long id, LocalDateTime fechaRecepcion, double precioProducto, int cantidadRecibida, long pedidoId,
+			long productoId) {
 		super();
+		this.id = id;
 		this.fechaRecepcion = fechaRecepcion;
 		this.precioProducto = precioProducto;
 		this.cantidadRecibida = cantidadRecibida;
-		this.pedido = pedido;
-		this.producto = producto;
+		this.pedidoId = pedidoId;
+		this.productoId = productoId;
 	}
 
 	public long getId() {
@@ -59,20 +55,20 @@ public class LoteDTO {
 		this.cantidadRecibida = cantidadRecibida;
 	}
 
-	public PedidoDTO getPedido() {
-		return pedido;
+	public long getPedidoId() {
+		return pedidoId;
 	}
 
-	public void setPedido(PedidoDTO pedido) {
-		this.pedido = pedido;
+	public void setPedidoId(long pedidoId) {
+		this.pedidoId = pedidoId;
 	}
 
-	public Producto getProducto() {
-		return producto;
+	public long getProductoId() {
+		return productoId;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setProductoId(long productoId) {
+		this.productoId = productoId;
 	}
 	
 }

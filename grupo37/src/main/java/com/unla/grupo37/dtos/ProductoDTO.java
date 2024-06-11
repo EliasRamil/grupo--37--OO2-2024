@@ -9,6 +9,7 @@ public class ProductoDTO {
 	public ProductoDTO() {}
 
 	public ProductoDTO(int id, String nombre, String descripcion, boolean activo) {
+		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -43,7 +44,7 @@ public class ProductoDTO {
 		return id;
 	}
 	
-	public int setId() {
+	protected int setId() {
 		return id;
 	}
 }

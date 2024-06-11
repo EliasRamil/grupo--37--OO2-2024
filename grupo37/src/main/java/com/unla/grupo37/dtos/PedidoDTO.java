@@ -2,23 +2,20 @@ package com.unla.grupo37.dtos;
 
 public class PedidoDTO {
 	private long id;
-	
-	private String proveedor;
-	
+	private String proveedor;	
 	private int cantidadPedida;
-    private ProductoDTO producto;
-    private UsuarioDTO admin;
-	private LoteDTO lote;
+    private long productoId;
+    private long adminId;
 	
 	public PedidoDTO() {}
 
-	public PedidoDTO(String proveedor, int cantidadPedida, ProductoDTO producto, UsuarioDTO admin, LoteDTO lote) {
+	public PedidoDTO(long id, String proveedor, int cantidadPedida, long productoId, long adminId) {
 		super();
+		this.id = id;
 		this.proveedor = proveedor;
 		this.cantidadPedida = cantidadPedida;
-		this.producto = producto;
-		this.admin = admin;
-		this.lote = lote;
+		this.productoId = productoId;
+		this.adminId = adminId;
 	}
 
 	public long getId() {
@@ -45,28 +42,20 @@ public class PedidoDTO {
 		this.cantidadPedida = cantidadPedida;
 	}
 
-	public ProductoDTO getProducto() {
-		return producto;
+	public long getProductoId() {
+		return productoId;
 	}
 
-	public void setProducto(ProductoDTO producto) {
-		this.producto = producto;
+	public void setProductoId(long productoId) {
+		this.productoId = productoId;
 	}
 
-	public UsuarioDTO getAdmin() {
-		return admin;
+	public long getAdminId() {
+		return adminId;
 	}
 
-	public void setAdmin(UsuarioDTO admin) {
-		this.admin = admin;
-	}
-
-	public LoteDTO getLote() {
-		return lote;
-	}
-
-	public void setLote(LoteDTO lote) {
-		this.lote = lote;
+	public void setAdminId(long adminId) {
+		this.adminId = adminId;
 	}
 	
 }

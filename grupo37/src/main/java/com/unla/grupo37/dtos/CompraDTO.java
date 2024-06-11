@@ -2,26 +2,22 @@ package com.unla.grupo37.dtos;
 
 import java.time.LocalDateTime;
 
-import com.unla.grupo37.entidades.Producto;
-
 public class CompraDTO {
 	private long id;
-	
 	private LocalDateTime fechaCompra;
 	private int cantidadComprada;
-	
-    private Producto producto;
-	
-    private UsuarioDTO cliente;
+    private long productoId;
+    private long clienteId;
 
 	public CompraDTO() {}
 
-	public CompraDTO(LocalDateTime fechaCompra, int cantidadComprada, Producto producto, UsuarioDTO cliente) {
+	public CompraDTO(long id, LocalDateTime fechaCompra, int cantidadComprada, long productoId, long clienteId) {
 		super();
+		this.id = id;
 		this.fechaCompra = fechaCompra;
 		this.cantidadComprada = cantidadComprada;
-		this.producto = producto;
-		this.cliente = cliente;
+		this.productoId = productoId;
+		this.clienteId = clienteId;
 	}
 
 	public long getId() {
@@ -48,20 +44,20 @@ public class CompraDTO {
 		this.cantidadComprada = cantidadComprada;
 	}
 
-	public Producto getProducto() {
-		return producto;
+	public long getProductoId() {
+		return productoId;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setProductoId(long productoId) {
+		this.productoId = productoId;
 	}
 
-	public UsuarioDTO getCliente() {
-		return cliente;
+	public long getClienteId() {
+		return clienteId;
 	}
 
-	public void setCliente(UsuarioDTO cliente) {
-		this.cliente = cliente;
+	public void setClienteId(long clienteId) {
+		this.clienteId = clienteId;
 	}
 	
 }

@@ -2,6 +2,8 @@ package com.unla.grupo37.entidades;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +21,9 @@ public class Lote {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@CreationTimestamp
 	private LocalDateTime fechaRecepcion;
+	
 	private double precioProducto;
 	private int cantidadRecibida;
 	
@@ -33,10 +37,8 @@ public class Lote {
 	
 	public Lote() {}
 
-	public Lote(LocalDateTime fechaRecepcion, double precioProducto, int cantidadRecibida, Pedido pedido,
-			Producto producto) {
+	public Lote(double precioProducto, int cantidadRecibida, Pedido pedido, Producto producto) {
 		super();
-		this.fechaRecepcion = fechaRecepcion;
 		this.precioProducto = precioProducto;
 		this.cantidadRecibida = cantidadRecibida;
 		this.pedido = pedido;
