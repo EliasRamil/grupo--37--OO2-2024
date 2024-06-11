@@ -42,6 +42,7 @@ public class ProductoDTO {
 	public int getId() {
 		return id;
 	}
+	
 	public int setId() {
 		return id;
 	}
