@@ -25,6 +25,8 @@ public class Compra {
 	
 	private int cantidadComprada;
 	
+	private double total;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_producto", nullable = false)
     private Producto producto;
@@ -40,6 +42,7 @@ public class Compra {
 		this.cantidadComprada = cantidadComprada;
 		this.producto = producto;
 		this.cliente = cliente;
+		this.total= cantidadComprada * producto.getPrecio();
 	}
 
 	public long getId() {

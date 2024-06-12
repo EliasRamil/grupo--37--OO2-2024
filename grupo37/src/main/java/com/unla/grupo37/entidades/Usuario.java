@@ -37,7 +37,7 @@ public class Usuario {
 	private LocalDateTime fechaActualizacion;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
-	private Set<RolDeUsuario> rolesDeUsuario = new HashSet<>();
+	private Set<RolDeUsuario> rolesDeUsuario = new HashSet<>(); //preguntar mañana
 
 	public Usuario() {}
 
