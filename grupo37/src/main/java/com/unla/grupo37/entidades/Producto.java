@@ -3,6 +3,7 @@ package com.unla.grupo37.entidades;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Producto {
 	private double precio;
 	private boolean activo = true;
 	
-	@OneToOne(mappedBy = "producto", fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "producto", fetch = FetchType.EAGER)
 	private Stock stock;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="producto")
