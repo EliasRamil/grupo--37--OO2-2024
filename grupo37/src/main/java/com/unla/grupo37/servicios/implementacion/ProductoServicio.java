@@ -12,6 +12,8 @@ import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.IProductoRepositorio;
 import com.unla.grupo37.servicios.IServicioGenerico;
 
+@Service
+@Transactional
 public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
 
 	@Autowired
