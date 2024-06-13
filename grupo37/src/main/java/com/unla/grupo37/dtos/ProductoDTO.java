@@ -1,19 +1,29 @@
 package com.unla.grupo37.dtos;
 
 public class ProductoDTO {
-	private int id;
+	private long id;
 	private String nombre;
 	private String descripcion;
 	private boolean activo;
+	private int cantidadActual;
+	private int cantidadCritica;
 
 	public ProductoDTO() {}
 
-	public ProductoDTO(int id, String nombre, String descripcion, boolean activo) {
+	public ProductoDTO(long id, String nombre, String descripcion, boolean activo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.activo = activo;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	protected void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -40,11 +50,20 @@ public class ProductoDTO {
 		this.activo = activo;
 	}
 
-	public int getId() {
-		return id;
+	public int getCantidadActual() {
+		return cantidadActual;
+	}
+
+	public void setCantidadActual(int cantidadActual) {
+		this.cantidadActual = cantidadActual;
+	}
+
+	public int getCantidadCritica() {
+		return cantidadCritica;
+	}
+
+	public void setCantidadCritica(int cantidadCritica) {
+		this.cantidadCritica = cantidadCritica;
 	}
 	
-	protected int setId() {
-		return id;
-	}
 }
