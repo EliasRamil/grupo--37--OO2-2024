@@ -29,7 +29,7 @@ public class Producto {
 	private double precio;
 	private boolean activo = true;
 	
-	@OneToOne(mappedBy = "producto", fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "producto", fetch = FetchType.EAGER)
 	private Stock stock;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="producto")
@@ -43,13 +43,12 @@ public class Producto {
 	
 	public Producto() {}
 
-	public Producto(String nombre, String descripcion, double precio, boolean activo, Stock stock, Lote lote) {
+	public Producto(String nombre, String descripcion, double precio, boolean activo) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.activo = activo;
-		this.stock = stock;
 	}
 
 	public long getId() {
