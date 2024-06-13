@@ -23,13 +23,11 @@ public class CompraServicio implements IServicioGenerico<Compra>{
 	
 	@Override
 	@Transactional
-	public List<Compra> findAll() throws Exception{
-		try {
-			List<Compra> entities= this.repositorioCompra.findAll();
-			return entities;
-		}catch(Exception e) {
-			throw new Exception(e.getMessage());
-		}
+	public List<Compra> findAll(){
+		
+		List<Compra> entities= this.repositorioCompra.findAll();
+		return entities;
+		
 	}
 	
 	@Override
