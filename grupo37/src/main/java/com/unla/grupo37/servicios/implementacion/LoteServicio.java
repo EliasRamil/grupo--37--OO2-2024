@@ -17,6 +17,8 @@ import com.unla.grupo37.servicios.IServicioGenerico;
 @Transactional
 public class LoteServicio implements IServicioGenerico<LoteDTO> {
 	
+	// TODO No hay que usar DTOs
+	
 	@Autowired
 	private ILoteRepositorio r;
 	private ModelMapper mM = new ModelMapper();

@@ -17,6 +17,8 @@ import com.unla.grupo37.servicios.IServicioGenerico;
 @Transactional
 public class PedidoServicio implements IServicioGenerico<PedidoDTO> {
 	
+	// TODO No hay que usar DTOs
+	
 	@Autowired
 	private IPedidoRepositorio r;
 	private ModelMapper mM = new ModelMapper();
