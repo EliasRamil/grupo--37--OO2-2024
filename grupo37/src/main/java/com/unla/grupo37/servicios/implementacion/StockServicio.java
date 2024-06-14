@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.grupo37.dtos.StockDTO;
+import com.unla.grupo37.entidades.Lote;
 import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.IStockRepositorio;
 import com.unla.grupo37.servicios.IServicioGenerico;
@@ -78,6 +79,20 @@ public class StockServicio implements IServicioGenerico<StockDTO> {
 	public boolean deleteById(long id) throws Exception {
 		//Se realiza de esta forma porque en el Stock no se tienen que eliminar elementos.
 		throw new Exception("No se puede eliminar el Stock");
+	}
+	
+	/**
+	 * En base a un <code>Lote</code>, actualiza la cantidad actual de dicho producto en <code>Stock</code>.
+	 * @param sk El <code>Stock</code> a actualizar.
+	 * @param lot El <code>Lote</code> con la cantidad de producto recibido.
+	 * @return Un booleano que indica si la accion fue exitosa.
+	 */
+	public boolean actualizarStock(Stock sk, Lote lot) {
+		//Stock sk = lot.getProducto().getStock();
+		sk.setCantidadActual(sk.getCantidadActual() + lot.getCantidadRecibida());
+		r.save(sk);
+		
+		return true;
 	}
 	
 }

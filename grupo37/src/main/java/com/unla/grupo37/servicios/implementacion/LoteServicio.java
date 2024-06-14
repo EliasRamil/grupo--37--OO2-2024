@@ -89,7 +89,7 @@ public class LoteServicio implements IServicioGenerico<LoteDTO> {
 	
 	
 	/**
-	 * En base al <code>Pedido</code> dado, crea un <code>Lote</code>, modifica sus campos de acuerdo al pedido, y modifica el <code>Stock</code> correspondiente.
+	 * En base al <code>Pedido</code> dado, crea un <code>Lote</code> y modifica sus campos de acuerdo al pedido.
 	 * @param pd El <code>Pedido</code> en cuestion.
 	 * @return Un booleano que indica si el procesamiento fue exitoso.
 	 */
@@ -103,8 +103,8 @@ public class LoteServicio implements IServicioGenerico<LoteDTO> {
 		// TODO lot.setPrecioProducto(???);
 		lot = r.save(lot);
 		
-		Stock sk = lot.getProducto().getStock();
-		sk.setCantidadActual(sk.getCantidadActual() + lot.getCantidadRecibida());
+		//Stock sk = lot.getProducto().getStock();
+		//sk.setCantidadActual(sk.getCantidadActual() + lot.getCantidadRecibida());
 		
 		return true;
 	}
