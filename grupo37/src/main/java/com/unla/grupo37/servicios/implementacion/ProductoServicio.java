@@ -51,6 +51,15 @@ public class ProductoServicio implements IProductoServicio {
 		
 		return aux;
 	}
+	
+	public Producto findByIdProducto(long id) throws Exception {
+		Producto p = rP.findById(id).orElse(null);
+		
+		if(p == null)
+			throw new Exception("No existe el Producto con el id: " + id);
+		
+		return p;
+	}
 
 	@Override
 	public ProductoDTO saveOne(ProductoDTO dto) throws Exception {
