@@ -5,20 +5,21 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Producto;
 import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.IProductoRepositorio;
-import com.unla.grupo37.repositorios.IRepositorioGenerico;
-import com.unla.grupo37.servicios.IServicioGenerico;
+import com.unla.grupo37.servicios.IProductoServicio;
 
-public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
+@Service
+@Transactional
+public class ProductoServicio implements IProductoServicio {
 
 	@Autowired
 	private IProductoRepositorio rP;
-	@Autowired
-	private IRepositorioGenerico<Stock> rS;
 	private ModelMapper mM = new ModelMapper();
 	
 	@Override
@@ -56,9 +57,12 @@ public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
 		ProductoDTO retorno = null;
 		
 		try {
-			Producto p = rP.save(mM.map(dto, Producto.class));
-			rS.save(new Stock(0, 0, p));
+			Producto p = mM.map(dto, Producto.class);
+			p.setStock(new Stock(dto.getCantidadActual(), dto.getCantidadCritica(), p));
+			rP.save(p);
 			retorno = mM.map(p, ProductoDTO.class);
+			retorno.setCantidadActual(p.getStock().getCantidadActual());
+			retorno.setCantidadCritica(p.getStock().getCantidadCritica());
 		} catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -67,8 +71,21 @@ public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
 
 	@Override
 	public ProductoDTO updateOne(ProductoDTO dto, long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Producto aux = rP.findById(id).orElse(null);	
+		
+		if(aux == null)
+			throw new Exception("No existe el Producto con el id: " + id);
+		
+		Producto p = mM.map(aux, Producto.class);
+		p.getStock().setCantidadActual(dto.getCantidadActual());
+		p.getStock().setCantidadCritica(dto.getCantidadCritica());
+		rP.save(p);
+		
+		ProductoDTO retorno = mM.map(p, ProductoDTO.class);
+		retorno.setCantidadActual(p.getStock().getCantidadActual());
+		retorno.setCantidadCritica(p.getStock().getCantidadCritica());
+		
+		return retorno;
 	}
 
 	@Override
@@ -81,6 +98,25 @@ public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
 		p.setActivo(false);
 		
 		return true;
+	}
+
+	@Override
+	public List<ProductoDTO> findAllbyActivo() {
+		List<Producto> productos = rP.findAll();
+		List<ProductoDTO> productosDTOs = new ArrayList<>();
+		
+		ProductoDTO aux;
+		for(Producto p :productos) {
+			aux = mM.map(p, ProductoDTO.class);
+			aux.setCantidadActual(p.getStock().getCantidadActual());
+			aux.setCantidadCritica(p.getStock().getCantidadCritica());
+			
+			if(aux.isActivo())
+				productosDTOs.add(aux);
+			
+		}
+		
+		return productosDTOs;
 	}
 
 }

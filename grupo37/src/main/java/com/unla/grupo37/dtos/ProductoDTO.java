@@ -4,13 +4,14 @@ public class ProductoDTO {
 	private long id;
 	private String nombre;
 	private String descripcion;
+	private double precio;
 	private boolean activo;
 	private int cantidadActual;
 	private int cantidadCritica;
 
 	public ProductoDTO() {}
 
-	public ProductoDTO(long id, String nombre, String descripcion, boolean activo) {
+	public ProductoDTO(long id, String nombre, String descripcion, double precio, boolean activo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -40,6 +41,14 @@ public class ProductoDTO {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	public boolean isActivo() {

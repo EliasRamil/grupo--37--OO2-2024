@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.grupo37.dtos.StockDTO;
 import com.unla.grupo37.entidades.Stock;
-import com.unla.grupo37.repositorios.IRepositorioGenerico;
+import com.unla.grupo37.repositorios.IStockRepositorio;
 import com.unla.grupo37.servicios.IServicioGenerico;
 
 @Service
@@ -18,7 +18,7 @@ import com.unla.grupo37.servicios.IServicioGenerico;
 public class StockServicio implements IServicioGenerico<StockDTO> {
 	
 	@Autowired
-	private IRepositorioGenerico<Stock> r;
+	private IStockRepositorio r;
 	private ModelMapper mM = new ModelMapper();
 
 	@Override
