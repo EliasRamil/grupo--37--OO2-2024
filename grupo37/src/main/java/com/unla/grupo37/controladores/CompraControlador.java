@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Compra;
+import com.unla.grupo37.servicios.IProductoServicio;
 import com.unla.grupo37.servicios.implementacion.CompraServicio;
-import com.unla.grupo37.servicios.implementacion.ProductoServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 
 @Controller
@@ -22,10 +22,10 @@ import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 public class CompraControlador {
 	
 	private CompraServicio compraServicio;
-	private ProductoServicio productoServicio;
+	private IProductoServicio productoServicio;
 	private UsuarioRolServicio usuarioRolServicio;
 	
-	public CompraControlador(CompraServicio compraServicio, ProductoServicio productoServicio, UsuarioRolServicio usuarioRolServicio) {
+	public CompraControlador(CompraServicio compraServicio, IProductoServicio productoServicio, UsuarioRolServicio usuarioRolServicio) {
 		this.compraServicio= compraServicio;
 		this.productoServicio= productoServicio;
 		this.usuarioRolServicio=usuarioRolServicio;
@@ -34,7 +34,7 @@ public class CompraControlador {
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("compra/ListaProductos");
-		List<ProductoDTO> listaProductos= productoServicio.findAll();
+		List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
 		mAV.addObject("productos", listaProductos);
 		
 		return mAV;

@@ -1,5 +1,8 @@
 package com.unla.grupo37.controladores;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +29,22 @@ public class UsuarioControlador {
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/index";
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    Object principal = authentication.getPrincipal();
+	    String r = "redirect:/";
+
+	    if (principal instanceof UserDetails) {
+	        UserDetails userDetails = (UserDetails) principal;
+	        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+	            // Acciones específicas para el rol "ROLE_ADMIN"
+	        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"))) {
+	            // Acciones específicas para el rol "ROLE_USER"
+	        	r += "compra";
+	        }
+	    }
+		
+		
+		return r;
 	}
 	
 }

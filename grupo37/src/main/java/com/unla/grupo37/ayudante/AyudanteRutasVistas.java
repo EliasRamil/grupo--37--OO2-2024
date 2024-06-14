@@ -3,7 +3,7 @@ package com.unla.grupo37.ayudante;
 public class AyudanteRutasVistas {
 
 	//HOME:
-	public final static String INDEX = "home/index";
+	public final static String INDEX = "compra/ListaProducto";
 	public final static String HELLO = "home/hello";
 	
 	//DEGREE:
