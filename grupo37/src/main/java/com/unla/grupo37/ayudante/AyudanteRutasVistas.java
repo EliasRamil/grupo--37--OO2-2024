@@ -19,8 +19,5 @@ public class AyudanteRutasVistas {
 	public final static String ROUTE_INDEX = "/index";
 	public final static String DEGREE_ROOT = "/degrees/";
 	
-	//COMPRA
-	public final static String COMPRA_INDEX ="/compra/ListaProductos";
-	public final static String COMPRA_CARRITO ="/compra/carrito";
 	
 }
