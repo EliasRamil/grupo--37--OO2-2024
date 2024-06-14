@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.repositorios.ICompraRepositorio;
 import com.unla.grupo37.servicios.IServicioGenerico;
@@ -15,9 +16,11 @@ import jakarta.transaction.Transactional;
 public class CompraServicio implements IServicioGenerico<Compra>{
 	
 	private ICompraRepositorio repositorioCompra;
+	private ProductoServicio productoServicio;
 	
-	public CompraServicio(ICompraRepositorio repositorioCompra) {
+	public CompraServicio(ICompraRepositorio repositorioCompra, ProductoServicio productoServicio) {
 		this.repositorioCompra= repositorioCompra;
+		this.productoServicio= productoServicio;
 	}
 
 	
@@ -46,7 +49,11 @@ public class CompraServicio implements IServicioGenerico<Compra>{
 	public Compra saveOne(Compra entity) throws Exception{
 		try {
 			Compra compra= this.repositorioCompra.save(entity);
+			ProductoDTO producto= productoServicio.findById(compra.getProducto().getId());
+			producto.setCantidadActual(producto.getCantidadActual() -compra.getCantidadComprada());
+			productoServicio.updateOne(producto, producto.getId());
 			return compra;
+			
 		}catch(Exception e){
 			throw new Exception(e.getMessage());
 		}
