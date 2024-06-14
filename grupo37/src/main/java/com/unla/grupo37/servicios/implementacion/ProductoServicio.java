@@ -5,14 +5,18 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Producto;
 import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.IProductoRepositorio;
-import com.unla.grupo37.servicios.IServicioGenerico;
+import com.unla.grupo37.servicios.IProductoServicio;
 
-public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
+@Service
+@Transactional
+public class ProductoServicio implements IProductoServicio {
 
 	@Autowired
 	private IProductoRepositorio rP;
@@ -94,6 +98,25 @@ public class ProductoServicio implements IServicioGenerico<ProductoDTO> {
 		p.setActivo(false);
 		
 		return true;
+	}
+
+	@Override
+	public List<ProductoDTO> findAllbyActivo() {
+		List<Producto> productos = rP.findAll();
+		List<ProductoDTO> productosDTOs = new ArrayList<>();
+		
+		ProductoDTO aux;
+		for(Producto p :productos) {
+			aux = mM.map(p, ProductoDTO.class);
+			aux.setCantidadActual(p.getStock().getCantidadActual());
+			aux.setCantidadCritica(p.getStock().getCantidadCritica());
+			
+			if(aux.isActivo())
+				productosDTOs.add(aux);
+			
+		}
+		
+		return productosDTOs;
 	}
 
 }
