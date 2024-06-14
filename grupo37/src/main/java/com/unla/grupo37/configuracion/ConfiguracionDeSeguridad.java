@@ -33,7 +33,7 @@ public class ConfiguracionDeSeguridad {
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*",
-							"/vendor/jquery/*", "/vendor/bootstrap/js/*", "/api/v1/**").permitAll();
+							"/vendor/jquery/*", "/vendor/bootstrap/js/*", "/api/v1/**", "/compra/*").permitAll();
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(login -> {
