@@ -1,5 +1,6 @@
 package com.unla.grupo37.servicios.implementacion;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.grupo37.dtos.LoteDTO;
 import com.unla.grupo37.entidades.Lote;
+import com.unla.grupo37.entidades.Pedido;
+import com.unla.grupo37.entidades.Producto;
+import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.ILoteRepositorio;
 import com.unla.grupo37.servicios.IServicioGenerico;
 
@@ -80,6 +84,29 @@ public class LoteServicio implements IServicioGenerico<LoteDTO> {
 	public boolean deleteById(long id) throws Exception {
 		//Se realiza de esta forma porque en el Lote no se tienen que eliminar elementos.
 		throw new Exception("No se puede eliminar el Lote");
+	}
+	
+	
+	
+	/**
+	 * En base al <code>Pedido</code> dado, crea un <code>Lote</code>, modifica sus campos de acuerdo al pedido, y modifica el <code>Stock</code> correspondiente.
+	 * @param pd El <code>Pedido</code> en cuestion.
+	 * @return Un booleano que indica si el procesamiento fue exitoso.
+	 */
+	public boolean procesarPedido(Pedido pd) {
+		Lote lot = new Lote();
+		
+		lot.setPedido(pd);
+		lot.setFechaRecepcion(LocalDateTime.now());
+		lot.setCantidadRecibida(pd.getCantidadPedida());
+		lot.setProducto(pd.getProducto());
+		// TODO lot.setPrecioProducto(???);
+		lot = r.save(lot);
+		
+		Stock sk = lot.getProducto().getStock();
+		sk.setCantidadActual(sk.getCantidadActual() + lot.getCantidadRecibida());
+		
+		return true;
 	}
 	
 }
