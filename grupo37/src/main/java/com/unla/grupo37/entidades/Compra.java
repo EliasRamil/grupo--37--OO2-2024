@@ -27,11 +27,11 @@ public class Compra {
 	
 	private double total;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_producto", nullable = false)
     private Producto producto;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_cliente", nullable = false)
     private Usuario cliente;
 

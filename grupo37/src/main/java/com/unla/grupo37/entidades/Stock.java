@@ -20,7 +20,7 @@ public class Stock {
 	private int cantidadCritica;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_poducto", nullable = false)
+	@JoinColumn(name = "fk_producto", nullable = false)
 	private Producto producto;
 	
 	public Stock() {}
