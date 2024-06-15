@@ -38,7 +38,7 @@ public class UsuarioControlador {
 	}
 
 	@GetMapping("/loginsuccess")
-	public synchronized String loginCheck() {
+	public String loginCheck() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    Object principal = authentication.getPrincipal();
 	    String r = "redirect:/";
