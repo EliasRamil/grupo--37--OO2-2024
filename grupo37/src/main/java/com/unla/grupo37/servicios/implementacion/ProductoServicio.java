@@ -24,7 +24,7 @@ public class ProductoServicio implements IProductoServicio {
 	
 	@Override
 	public List<ProductoDTO> findAll() {
-		List<Producto> productos = rP.findAll();
+		List<Producto> productos = rP.findAllProductosWithStock();
 		List<ProductoDTO> productosDTOs = new ArrayList<>();
 		
 		ProductoDTO aux;
@@ -40,7 +40,7 @@ public class ProductoServicio implements IProductoServicio {
 
 	@Override
 	public ProductoDTO findById(long id) throws Exception {
-		Producto p = rP.findById(id).orElse(null);
+		Producto p = rP.findProductoWithStockById(id);
 		
 		if(p == null)
 			throw new Exception("No existe el Producto con el id: " + id);
@@ -53,7 +53,7 @@ public class ProductoServicio implements IProductoServicio {
 	}
 	
 	public Producto findByIdProducto(long id) throws Exception {
-		Producto p = rP.findById(id).orElse(null);
+		Producto p = rP.findProductoWithStockById(id);
 		
 		if(p == null)
 			throw new Exception("No existe el Producto con el id: " + id);
@@ -67,7 +67,7 @@ public class ProductoServicio implements IProductoServicio {
 		
 		try {
 			Producto p = mM.map(dto, Producto.class);
-			p.setStock(new Stock(dto.getCantidadActual(), dto.getCantidadCritica(), p));
+			p.setStock(new Stock(dto.getCantidadActual(), dto.getCantidadCritica()));
 			rP.save(p);
 			retorno = mM.map(p, ProductoDTO.class);
 			retorno.setCantidadActual(p.getStock().getCantidadActual());
@@ -80,7 +80,7 @@ public class ProductoServicio implements IProductoServicio {
 
 	@Override
 	public ProductoDTO updateOne(ProductoDTO dto, long id) throws Exception {
-		Producto aux = rP.findById(id).orElse(null);	
+		Producto aux = rP.findProductoWithStockById(id);
 		
 		if(aux == null)
 			throw new Exception("No existe el Producto con el id: " + id);

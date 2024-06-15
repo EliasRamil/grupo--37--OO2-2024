@@ -11,15 +11,6 @@ public class CompraDTO {
 
 	public CompraDTO() {}
 
-	public CompraDTO(long id, LocalDateTime fechaCompra, int cantidadComprada, long productoId, long clienteId) {
-		super();
-		this.id = id;
-		this.fechaCompra = fechaCompra;
-		this.cantidadComprada = cantidadComprada;
-		this.productoId = productoId;
-		this.clienteId = clienteId;
-	}
-
 	public long getId() {
 		return id;
 	}

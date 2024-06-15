@@ -10,14 +10,6 @@ public class ProductoDTO {
 	private int cantidadCritica;
 
 	public ProductoDTO() {}
-
-	public ProductoDTO(long id, String nombre, String descripcion, double precio, boolean activo) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.activo = activo;
-	}
 	
 	public long getId() {
 		return id;

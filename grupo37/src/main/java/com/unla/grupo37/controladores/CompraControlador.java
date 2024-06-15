@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.servicios.IProductoServicio;
@@ -33,7 +33,7 @@ public class CompraControlador {
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView("compra/ListaProductos");
+		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.COMPRA_INDEX);
 		List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
 		mAV.addObject("productos", listaProductos);
 		
@@ -46,10 +46,10 @@ public class CompraControlador {
 		
 		
 		Compra compra= new Compra(Integer.parseInt(cantidad), productoServicio.findByIdProducto(Integer.parseInt(id)),
-				usuarioRolServicio.getClienteById(1));
+				usuarioRolServicio.getClienteById(2));
 		compraServicio.saveOne(compra);
 		
-		return "redirect:/compra";
+		return AyudanteRutasVistas.COMPRA_ROOT;
 		
 	}
 	

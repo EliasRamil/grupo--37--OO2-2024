@@ -1,12 +1,9 @@
 package com.unla.grupo37.entidades;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,17 +16,16 @@ public class Stock {
 	private int cantidadActual;
 	private int cantidadCritica;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	/*@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_producto", nullable = false)
-	private Producto producto;
+	private Producto producto;*/
 	
 	public Stock() {}
 
-	public Stock(int cantidadActual, int cantidadCritica, Producto producto) {
+	public Stock(int cantidadActual, int cantidadCritica) {
 		super();
 		this.cantidadActual = cantidadActual;
 		this.cantidadCritica = cantidadCritica;
-		this.producto = producto;
 	}
 
 	public long getId() {
@@ -54,14 +50,6 @@ public class Stock {
 
 	public void setCantidadCritica(int cantidadCritica) {
 		this.cantidadCritica = cantidadCritica;
-	}
-
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
 	}
 	
 }

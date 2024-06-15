@@ -1,8 +1,5 @@
 package com.unla.grupo37.entidades;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +7,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -30,17 +27,10 @@ public class Producto {
 	private double precio;
 	private boolean activo = true;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "producto", fetch = FetchType.EAGER)
+	//@OneToOne(cascade = CascadeType.ALL,mappedBy = "producto", fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_stock", nullable = false)
 	private Stock stock;
-
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="producto")
-	private Set<Compra> compras = new HashSet<>();
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="producto")
-	private Set<Pedido> pedidos = new HashSet<>();
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="producto")
-	private Set<Lote> lotes = new HashSet<>();
 	
 	public Producto() {}
 
@@ -98,30 +88,6 @@ public class Producto {
 
 	public void setStock(Stock stock) {
 		this.stock = stock;
-	}
-
-	public Set<Compra> getCompras() {
-		return compras;
-	}
-
-	public void setCompras(Set<Compra> compras) {
-		this.compras = compras;
-	}
-
-	public Set<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(Set<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
-	public Set<Lote> getLotes() {
-		return lotes;
-	}
-
-	public void setLotes(Set<Lote> lotes) {
-		this.lotes = lotes;
 	}
 	
 }

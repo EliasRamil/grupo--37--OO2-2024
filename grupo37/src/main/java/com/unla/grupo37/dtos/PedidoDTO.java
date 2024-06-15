@@ -9,15 +9,6 @@ public class PedidoDTO {
 	
 	public PedidoDTO() {}
 
-	public PedidoDTO(long id, String proveedor, int cantidadPedida, long productoId, long adminId) {
-		super();
-		this.id = id;
-		this.proveedor = proveedor;
-		this.cantidadPedida = cantidadPedida;
-		this.productoId = productoId;
-		this.adminId = adminId;
-	}
-
 	public long getId() {
 		return id;
 	}

@@ -1,9 +1,6 @@
 package com.unla.grupo37.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,11 +34,11 @@ public class UsuarioControlador {
 		return AyudanteRutasVistas.USER_LOGOUT;
 	}
 
-	@GetMapping("/loginsuccess")
+	/*@GetMapping("/loginsuccess")
 	public String loginCheck() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    Object principal = authentication.getPrincipal();
-	    String r = "redirect:/";
+	    String r = AyudanteRutasVistas.LOGIN_ROOT;
 
 	    if (principal instanceof UserDetails) {
 	        UserDetails userDetails = (UserDetails) principal;
@@ -49,27 +46,27 @@ public class UsuarioControlador {
 	            // Acciones específicas para el rol "ROLE_ADMIN"
 	        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_USUARIO"))) {
 	            // Acciones específicas para el rol "ROLE_USER"
-	        	r += "compra";
+	        	r = AyudanteRutasVistas.COMPRA_ROOT;
 	        }
 	    }
 		
 		return r;
-	}
+	}*/
 	
 	@GetMapping("")
 	public String redirect(HttpServletRequest request) {
 		Usuario user=repo.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(request.getUserPrincipal().getName());
+		String s = AyudanteRutasVistas.LOGIN_ROOT;
 		
 		for(RolDeUsuario r: user.getRolesDeUsuario()) {
 			if(r.getRol().equals("ROL_USUARIO")) {
-				return "redirect:/compra";
+				s = AyudanteRutasVistas.COMPRA_ROOT;
 			}else if(r.getRol().equals("ROL_ADMIN")){
-				return "redirect:/admin";
+				s = "redirect:/admin";
 			}
 		}
 		
-		
-		return "redirect:/login";
+		return s;
 	}
 	
 }
