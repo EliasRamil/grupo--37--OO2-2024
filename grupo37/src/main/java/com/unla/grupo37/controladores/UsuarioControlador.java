@@ -1,5 +1,6 @@
 package com.unla.grupo37.controladores;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,10 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.unla.grupo37.ayudante.AyudanteRutasVistas;
+import com.unla.grupo37.entidades.RolDeUsuario;
+import com.unla.grupo37.entidades.Usuario;
+import com.unla.grupo37.repositorios.IUsuarioRepositorio;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class UsuarioControlador {
 
+	@Autowired
+	private IUsuarioRepositorio repo;
+	
+	
 	@GetMapping("/login")
 	public String login(Model model,
 						@RequestParam(name="error",required=false) String error,
@@ -28,7 +38,7 @@ public class UsuarioControlador {
 	}
 
 	@GetMapping("/loginsuccess")
-	public String loginCheck() {
+	public synchronized String loginCheck() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    Object principal = authentication.getPrincipal();
 	    String r = "redirect:/";
@@ -43,8 +53,23 @@ public class UsuarioControlador {
 	        }
 	    }
 		
-		
 		return r;
+	}
+	
+	@GetMapping("")
+	public String redirect(HttpServletRequest request) {
+		Usuario user=repo.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(request.getUserPrincipal().getName());
+		
+		for(RolDeUsuario r: user.getRolesDeUsuario()) {
+			if(r.getRol().equals("ROL_USUARIO")) {
+				return "redirect:/compra";
+			}else if(r.getRol().equals("ROL_ADMIN")){
+				return "redirect:/admin";
+			}
+		}
+		
+		
+		return "redirect:/login";
 	}
 	
 }
