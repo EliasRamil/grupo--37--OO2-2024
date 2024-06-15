@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/h")
 public class HomeControlador {
 	
 	//GET Example: SERVER/index
