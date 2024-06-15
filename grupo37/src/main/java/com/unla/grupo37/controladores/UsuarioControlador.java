@@ -1,6 +1,9 @@
 package com.unla.grupo37.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +37,7 @@ public class UsuarioControlador {
 		return AyudanteRutasVistas.USER_LOGOUT;
 	}
 
-	/*@GetMapping("/loginsuccess")
+	@GetMapping("/loginsuccess")
 	public String loginCheck() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    Object principal = authentication.getPrincipal();
@@ -51,7 +54,7 @@ public class UsuarioControlador {
 	    }
 		
 		return r;
-	}*/
+	}
 	
 	@GetMapping("")
 	public String redirect(HttpServletRequest request) {
