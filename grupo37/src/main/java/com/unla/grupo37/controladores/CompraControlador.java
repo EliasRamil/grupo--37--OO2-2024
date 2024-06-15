@@ -18,7 +18,7 @@ import com.unla.grupo37.servicios.implementacion.CompraServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/compra")
 public class CompraControlador {
 	
 	private CompraServicio compraServicio;
@@ -31,7 +31,7 @@ public class CompraControlador {
 		this.usuarioRolServicio=usuarioRolServicio;
 	}
 	
-	@GetMapping("/compra")
+	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("compra/ListaProductos");
 		List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();

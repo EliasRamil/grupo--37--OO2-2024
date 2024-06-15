@@ -37,7 +37,7 @@ public class UsuarioControlador {
 	        UserDetails userDetails = (UserDetails) principal;
 	        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
 	            // Acciones específicas para el rol "ROLE_ADMIN"
-	        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"))) {
+	        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_USUARIO"))) {
 	            // Acciones específicas para el rol "ROLE_USER"
 	        	r += "compra";
 	        }
