@@ -2,84 +2,74 @@ package com.unla.grupo37.servicios.implementacion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.unla.grupo37.dtos.PedidoDTO;
+import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.entidades.Pedido;
 import com.unla.grupo37.repositorios.IPedidoRepositorio;
+import com.unla.grupo37.servicios.IPedidoServicio;
 import com.unla.grupo37.servicios.IServicioGenerico;
 
 @Service
 @Transactional
-public class PedidoServicio implements IServicioGenerico<PedidoDTO> {
+public class PedidoServicio implements IPedidoServicio {
 	
 	// TODO No hay que usar DTOs
 	
 	@Autowired
-	private IPedidoRepositorio r;
-	private ModelMapper mM = new ModelMapper();
+	private IPedidoRepositorio repo;
+	//private ModelMapper mM = new ModelMapper();
 
 	@Override
-	public List<PedidoDTO> findAll() {
-		List<Pedido> pedidos = r.findAll(); // Obtener todos los registros de Pedido del repositorio
-	    List<PedidoDTO> PedidoDTOs = new ArrayList<>();
-
-	    for (Pedido pedido : pedidos) {
-	        PedidoDTO PedidoDTO = mM.map(pedido, PedidoDTO.class); // Mapear cada Pedido a un PedidoDTO
-	        PedidoDTOs.add(PedidoDTO);
-	    }
-
-	    return PedidoDTOs;
+	public List<Pedido> findAll() {
+	    return repo.findAll(); // Obtener todos los registros de Pedido del repositorio
 	}
 
 	@Override
-	public PedidoDTO findById(long id) throws Exception {
-		Pedido aux = r.findById(id).orElse(null);
+	public Pedido findById(long id) throws Exception {
+		Pedido pd = repo.findById(id).orElse(null);
 		
-		if(aux == null)
-			throw new Exception("No existe Pedido con el id: " + id);
+		if (pd == null) throw new Exception("No existe Pedido con ID " + id);
 		
-		return mM.map(aux, PedidoDTO.class);
+		return pd;
 	}
 
 	@Override
-	public PedidoDTO saveOne(PedidoDTO dto) throws Exception {
-		PedidoDTO retorno = null;
-		
+	public Pedido saveOne(Pedido pd) throws Exception {
 		try {
-			Pedido s = r.save(mM.map(dto, Pedido.class));
-			retorno = mM.map(s, PedidoDTO.class);
+			pd = repo.save(pd);
 		} catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 		
-		return retorno;
+		return pd;
 	}
-
+	
+	// TODO long id???
 	@Override
-	public PedidoDTO updateOne(PedidoDTO dto, long id) throws Exception {
-		PedidoDTO retorno = null;
-		
+	public Pedido updateOne(Pedido pd, long id) throws Exception {
 		try {
-			PedidoDTO aux = this.findById(id);
-			Pedido s = mM.map(aux, Pedido.class);
-			s = r.save(mM.map(dto, Pedido.class));
-			retorno = mM.map(s, PedidoDTO.class);
+			Pedido aux = repo.findById(id).orElse(null); // TODO innecesario?
+			if (aux==null) throw new Exception("No existe Pedido con ID " + id);
+			
+			pd = repo.save(pd);
 		} catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 		
-		return retorno;
+		return pd;
 	}
 
 	@Override
 	public boolean deleteById(long id) throws Exception {
-		//Se realiza de esta forma porque en el Pedido no se tienen que eliminar elementos.
+		// TODO PedidoServicio.deleteById?
 		throw new Exception("No se puede eliminar el Pedido");
+		//return false;
 	}
 	
 }
