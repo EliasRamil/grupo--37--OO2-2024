@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.unla.grupo37.ayudante.AyudanteRutasVistas;
-import com.unla.grupo37.entidades.RolDeUsuario;
-import com.unla.grupo37.entidades.Usuario;
-import com.unla.grupo37.repositorios.IUsuarioRepositorio;
+import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class UsuarioControlador {
 
 	@Autowired
-	private IUsuarioRepositorio repo;
+	private UsuarioServicio uS;
 	
 	
 	@GetMapping("/login")
@@ -46,10 +44,8 @@ public class UsuarioControlador {
 	    if (principal instanceof UserDetails) {
 	        UserDetails userDetails = (UserDetails) principal;
 	        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN"))) {
-	            // Acciones específicas para el rol "ROLE_ADMIN"
 	        	r = AyudanteRutasVistas.ADMIN_ROOT;
 	        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_USUARIO"))) {
-	            // Acciones específicas para el rol "ROLE_USER"
 	        	r = AyudanteRutasVistas.COMPRA_ROOT;
 	        }
 	    }
@@ -59,18 +55,26 @@ public class UsuarioControlador {
 	
 	@GetMapping("")
 	public String redirect(HttpServletRequest request) {
-		Usuario user=repo.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(request.getUserPrincipal().getName());
-		String s = AyudanteRutasVistas.LOGIN_ROOT;
+		UserDetails userDetails = uS.loadUserByUsername(request.getUserPrincipal().getName());
+		String r = AyudanteRutasVistas.LOGIN_ROOT;
 		
-		for(RolDeUsuario r: user.getRolesDeUsuario()) {
+		/*for(RolDeUsuario r: user.getRolesDeUsuario()) {
 			if(r.getRol().equals("ROL_USUARIO")) {
 				s = AyudanteRutasVistas.COMPRA_ROOT;
 			}else if(r.getRol().equals("ROL_ADMIN")){
 				s = AyudanteRutasVistas.ADMIN_ROOT;
 			}
-		}
+		}*/
 		
-		return s;
+		if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN"))) {
+            // Acciones específicas para el rol "ROLE_ADMIN"
+        	r = AyudanteRutasVistas.ADMIN_ROOT;
+        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_USUARIO"))) {
+            // Acciones específicas para el rol "ROLE_USER"
+        	r = AyudanteRutasVistas.COMPRA_ROOT;
+        }
+		
+		return r;
 	}
 	
 }

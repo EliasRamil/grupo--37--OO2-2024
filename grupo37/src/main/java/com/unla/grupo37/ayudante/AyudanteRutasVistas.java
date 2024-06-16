@@ -12,6 +12,7 @@ public class AyudanteRutasVistas {
 	//ADMIN:
 	public final static String ADMIN_INDEX = "admin/index";
 	public final static String ADMIN_PEDIDO = "admin/pedido";
+	public final static String ADMIN_LOTE = "admin/lote";
 	
 	//REDIRECCIONAR:
 	public final static String LOGIN_ROOT = "redirect:/login";

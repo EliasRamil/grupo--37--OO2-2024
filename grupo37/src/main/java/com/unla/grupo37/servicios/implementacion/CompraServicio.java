@@ -8,15 +8,16 @@ import org.springframework.stereotype.Service;
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.repositorios.ICompraRepositorio;
-import com.unla.grupo37.servicios.IServicioGenerico;
+import com.unla.grupo37.servicios.ICompraServicio;
+import com.unla.grupo37.servicios.IProductoServicio;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class CompraServicio implements IServicioGenerico<Compra>{
+public class CompraServicio implements ICompraServicio {
 	
 	private ICompraRepositorio repositorioCompra;
-	private ProductoServicio productoServicio;
+	private IProductoServicio productoServicio;
 	
 	public CompraServicio(ICompraRepositorio repositorioCompra, ProductoServicio productoServicio) {
 		this.repositorioCompra= repositorioCompra;

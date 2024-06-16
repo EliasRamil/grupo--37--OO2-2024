@@ -30,6 +30,10 @@ public class UsuarioServicio implements UserDetailsService {
 		Usuario u= uR.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(nombreDeUsuario);
 		return construirUsuario(u, construirAutoridadesConcedidas(u.getRolesDeUsuario()));
 	}
+	
+	public Usuario traerUsuario(String nombreDeUsuario) {
+		return uR.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(nombreDeUsuario);
+	}
 
 	private User construirUsuario(Usuario u, List<GrantedAuthority> grantedAuthorities) {
 		return new User(u.getNombreDeUsuario(), u.getClave(), u.isActivada(),
@@ -44,4 +48,5 @@ public class UsuarioServicio implements UserDetailsService {
 		}
 		return new ArrayList<>(grantedAuthorities);
 	}
+	
 }
