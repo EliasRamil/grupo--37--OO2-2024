@@ -13,27 +13,46 @@ import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 @RequestMapping("/admin")
 public class AdminControlador {
 	
-	@GetMapping("")
-	public ModelAndView index() {
-		String aux = "error/403";
+	private String permisoVista() {
+		String r = "error/403";
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 	    if (principal instanceof UserDetails) {
 	        if(((UserDetails) principal).getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN")))
-	        	aux = AyudanteRutasVistas.ADMIN_INDEX;
+	        	r = "Ok";
 	    }
+		
+		return r;
+	}
+	
+	@GetMapping("")
+	public ModelAndView index() {
+		String aux = permisoVista();
+		
+		if(aux.equals("Ok"))
+			aux = AyudanteRutasVistas.ADMIN_INDEX;
 		
 		return new ModelAndView(aux);
 	}
 
 	@GetMapping("/pedido")
     public String pedido() {
-        return AyudanteRutasVistas.ADMIN_PEDIDO;
+		String aux = permisoVista();
+		
+		if(aux.equals("Ok"))
+			aux = AyudanteRutasVistas.ADMIN_PEDIDO;
+		
+        return aux;
     }
 	
 	@GetMapping("/lote")
     public String lote() {
-        return AyudanteRutasVistas.ADMIN_LOTE;
+		String aux = permisoVista();
+		
+		if(aux.equals("Ok"))
+			aux = AyudanteRutasVistas.ADMIN_LOTE;
+		
+        return aux;
     }
 	
 }
