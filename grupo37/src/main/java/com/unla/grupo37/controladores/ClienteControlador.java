@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_USUARIO')")
+@PreAuthorize("hasRole('ROL_USUARIO')")
 @RequestMapping("/cliente")
 public class ClienteControlador {
 	private UsuarioRolServicio usuarioRolServicio;

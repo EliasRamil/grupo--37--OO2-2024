@@ -6,6 +6,6 @@ public class TestBCryptPasswordEncoder {
 
 	public static void main(String[] args) {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-		System.out.println(pe.encode("cliente"));
+		System.out.println(pe.encode("1Mar22"));
 	}
 }

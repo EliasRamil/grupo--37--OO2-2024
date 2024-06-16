@@ -45,8 +45,9 @@ public class UsuarioControlador {
 
 	    if (principal instanceof UserDetails) {
 	        UserDetails userDetails = (UserDetails) principal;
-	        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+	        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN"))) {
 	            // Acciones específicas para el rol "ROLE_ADMIN"
+	        	r = AyudanteRutasVistas.ADMIN_ROOT;
 	        } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_USUARIO"))) {
 	            // Acciones específicas para el rol "ROLE_USER"
 	        	r = AyudanteRutasVistas.COMPRA_ROOT;
@@ -65,7 +66,7 @@ public class UsuarioControlador {
 			if(r.getRol().equals("ROL_USUARIO")) {
 				s = AyudanteRutasVistas.COMPRA_ROOT;
 			}else if(r.getRol().equals("ROL_ADMIN")){
-				s = "redirect:/admin";
+				s = AyudanteRutasVistas.ADMIN_ROOT;
 			}
 		}
 		
