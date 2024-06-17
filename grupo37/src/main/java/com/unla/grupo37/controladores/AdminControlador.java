@@ -24,33 +24,12 @@ import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminControlador {
+public class AdminControlador extends AbstractAdminVista{
 	
-	private IPedidoServicio pedidoServicio;
-	private IProductoServicio productoServicio;
-	private UsuarioRolServicio usuarioRolServicio;
-	private UsuarioServicio u;
+	public AdminControlador() {	}
 	
-	public AdminControlador(IPedidoServicio pedidoServicio, IProductoServicio productoServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
-		this.pedidoServicio = pedidoServicio;
-		this.productoServicio = productoServicio;
-		this.usuarioRolServicio = usuarioRolServicio;
-		this.u = u;
-	}
-	
-	private String permisoVista() {
-		String r = "error/403";
-		
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-	    if (principal instanceof UserDetails) {
-	        if(((UserDetails) principal).getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN")))
-	        	r = "Ok";
-	    }
-		
-		return r;
-	}
-	
-	@GetMapping("")
+	//@GetMapping("")
+	@GetMapping(value={"", "index.html"})
 	public ModelAndView index() {
 		String aux = permisoVista();
 		
