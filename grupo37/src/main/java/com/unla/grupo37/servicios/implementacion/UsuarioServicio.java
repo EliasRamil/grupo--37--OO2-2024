@@ -27,7 +27,8 @@ public class UsuarioServicio implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String nombreDeUsuario) throws UsernameNotFoundException {
-		Usuario u= uR.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(nombreDeUsuario);
+		Usuario u = uR.findByNombreDeUsuarioAndFetchRolesDeUsuarioEagerly(nombreDeUsuario);
+		if (u == null) throw new UsernameNotFoundException("Este usuario no existe");
 		return construirUsuario(u, construirAutoridadesConcedidas(u.getRolesDeUsuario()));
 	}
 	

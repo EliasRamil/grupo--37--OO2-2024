@@ -1,19 +1,37 @@
 package com.unla.grupo37.dtos;
 
 public class PedidoDTO {
-	private long id;
+	public long id;
 	private String proveedor;	
 	private int cantidadPedida;
+	private int idProducto;
+    private int idAdmin;
     private String nombreProducto;
     private String nombreAdmin;
 	
+	public String getNombreProducto() {
+		return nombreProducto;
+	}
+
+	public void setNombreProducto(String nombreProducto) {
+		this.nombreProducto = nombreProducto;
+	}
+
+	public String getNombreAdmin() {
+		return nombreAdmin;
+	}
+
+	public void setNombreAdmin(String nombreAdmin) {
+		this.nombreAdmin = nombreAdmin;
+	}
+
 	public PedidoDTO() {}
 
 	public long getId() {
 		return id;
 	}
 
-	protected void setId(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -33,20 +51,22 @@ public class PedidoDTO {
 		this.cantidadPedida = cantidadPedida;
 	}
 
-	public String getNombreProducto() {
-		return nombreProducto;
+	public int getIdProducto() {
+		return idProducto;
 	}
 
-	public void setNombreProducto(String nombreProducto) {
-		this.nombreProducto = nombreProducto;
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
 	}
 
-	public String getNombreAdmin() {
-		return nombreAdmin;
+	public int getIdAdmin() {
+		return idAdmin;
 	}
 
-	public void setNombreAdmin(String nombreAdmin) {
-		this.nombreAdmin = nombreAdmin;
+	public void setIdAdmin(int idAdmin) {
+		this.idAdmin = idAdmin;
 	}
+	
+	
 	
 }

@@ -27,32 +27,43 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1>Cargar Lote</h1>
-				<div class="card-deck" th:each="pedido : ${pedidos}">
-	
-	
-					<div class="card">
-	
-						<div class="card-body">
-                            
-
-							<h4 class="card-title">Pedido</h4>
-                            <h6>Pedidos pendientes</h6>
-                            <p class="card-text">Id: $ <span th:text="${pedido.id}"></span> </p>
-                            <p class="card-text">Proveedor: $ <span th:text="${pedido.proveedor}"></span> </p>
-                            <p class="card-text">Cantidad: $ <span th:text="${pedido.cantidadPedida}"></span> </p>
-							<p class="card-text">Producto: $ <span th:text="${producto.nombreProducto}"></span> </p>
-                            <p class="card-text">Usuario: $ <span th:text="${producto.nombreUsuario}"></span> </p>
-	
-						</div>
-	
-					</div>
-				 
-                    <form th:action="@{'/compra/'+${pedido.id}}" method="post">
-                        <p>Id del Pedido a recibir:  <input type="number"/> </p> 
-                        <p>Precio:  <input type="number"/> </p> 
-                        <button type="submit" value="value" class="btn btn-primary">Confirmar</button>
-                    </form>
+				<h1>Cargar Lote</h1><br>
+				
+				<div class="container text-center">
+					<table class="table">
+						
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">ID Pedido</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Cantidad</th>
+								<th scope="col">Proveedor</th>
+								<th scope="col">Admin</th>
+								<th scope="col">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto : ${pedidosDTO}">
+								<td th:text="${dto.id}">[ID]</td>
+								<td th:text="${dto.nombreProducto}">[prod]</td>
+								<td th:text="${dto.cantidadPedida}">[cant]</td>
+								<td th:text="${dto.proveedor}">[prov]</td>
+								<td th:text="${dto.nombreAdmin}">[admin]</td>
+								<td>
+									<form th:action="@{'/admin/lote/'+${dto.id}}" method="post">
+										<!-- <p>Id del Pedido a recibir:  <input type="number"/> </p> -->
+										<!-- <p>Precio:  <input type="number"/> </p> -->
+										<!-- <button type="submit" value="value" class="btn btn-primary">Confirmar</button> -->
+										
+										<button type="submit" value="process" class="btn btn-primary">Crear lote?</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<span th:if="${#lists.isEmpty(pedidosDTO)} == true">No hay pedidos pendientes.</span>
+					
 				</div>
 			</div>
 		</div>

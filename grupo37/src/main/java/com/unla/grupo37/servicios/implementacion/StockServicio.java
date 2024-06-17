@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.grupo37.dtos.StockDTO;
+import com.unla.grupo37.entidades.Compra;
+import com.unla.grupo37.entidades.Lote;
 import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.IStockRepositorio;
 import com.unla.grupo37.servicios.IServicioGenerico;
@@ -78,6 +80,38 @@ public class StockServicio implements IServicioGenerico<StockDTO> {
 	public boolean deleteById(long id) throws Exception {
 		//Se realiza de esta forma porque en el Stock no se tienen que eliminar elementos.
 		throw new Exception("No se puede eliminar el Stock");
+	}
+	
+	/**
+	 * En base a un <code>Lote</code>, obtiene el <code>Stock</code> del producto y actualiza la cantidad.
+	 * @param lot El <code>Lote</code> con la cantidad de producto recibido.
+	 * @return Un booleano que indica si la accion fue exitosa.
+	 */
+	public boolean actualizarStock(Lote lot) {
+		Stock sk = lot.getProducto().getStock();
+		
+		sk.setCantidadActual(sk.getCantidadActual() + lot.getCantidadRecibida());
+		r.save(sk);
+		
+		return true;
+	}
+	
+	/**
+	 * En base a un <code>Lote</code>, obtiene el <code>Stock</code> del producto y actualiza la cantidad.
+	 * @param lot El <code>Lote</code> con la cantidad de producto recibido.
+	 * @return Un booleano que indica si la accion fue exitosa.
+	 * @throws Exception si la compra excede el stock disponible.
+	 */
+	public boolean actualizarStock(Compra com) throws Exception {
+		Stock sk = com.getProducto().getStock();
+		
+		int diff = sk.getCantidadActual() - com.getCantidadComprada();
+		if (diff < 0) throw new Exception("La cantidad comprada excede la cantidad en stock");
+		//Stock sk = lot.getProducto().getStock();
+		sk.setCantidadActual(diff);
+		r.save(sk);
+		
+		return true;
 	}
 	
 }
