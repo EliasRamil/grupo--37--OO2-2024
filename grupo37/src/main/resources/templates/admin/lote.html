@@ -27,57 +27,44 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1>Cargar Lote</h1>
+				<h1>Cargar Lote</h1><br>
 				
-				<span th:if="${#lists.isEmpty(pedidos)} == true">No hay pedidos pendientes.</span>
-				
-				<div class="card-deck" th:each="pedidodto : ${pedidosDTO}">
+				<div class="container text-center">
+					<table class="table">
+						
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">ID Pedido</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Cantidad</th>
+								<th scope="col">Proveedor</th>
+								<th scope="col">Admin</th>
+								<th scope="col">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto : ${pedidosDTO}">
+								<td th:text="${dto.id}">[ID]</td>
+								<td th:text="${dto.nombreProducto}">[prod]</td>
+								<td th:text="${dto.cantidadPedida}">[cant]</td>
+								<td th:text="${dto.proveedor}">[prov]</td>
+								<td th:text="${dto.nombreAdmin}">[admin]</td>
+								<td>
+									<form th:action="@{'/admin/lote/'+${dto.id}}" method="post">
+										<!-- <p>Id del Pedido a recibir:  <input type="number"/> </p> -->
+										<!-- <p>Precio:  <input type="number"/> </p> -->
+										<!-- <button type="submit" value="value" class="btn btn-primary">Confirmar</button> -->
+										
+										<button type="submit" value="process" class="btn btn-primary">Crear lote?</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 					
-					<div class="card">
-					
-						<div class="card-body">
-					        
-							<h4 class="card-title">Pedido ID <span th:text="${pedidodto.id}"></span></h4>
-							<p>
-								<span class="card-text">Producto: <span th:text="${pedidodto.nombreProducto}"></span></span></br>
-								<span class="card-text">Cantidad: <span th:text="${pedidodto.cantidadPedida}"></span></span></br>
-								<span class="card-text">Proveedor: <span th:text="${pedidodto.proveedor}"></span></span></br>
-							</p>
-							
-					        <span class="card-text">Pedido por: <span th:text="${pedidodto.nombreAdmin}"></span> </span>
-							
-							<form th:action="@{'/admin/lote/'+${pedidodto.id}}" method="post">
-						    	<!-- <p>Id del Pedido a recibir:  <input type="number"/> </p> -->
-						    	<!-- <p>Precio:  <input type="number"/> </p> -->
-						    	<!-- <button type="submit" value="value" class="btn btn-primary">Confirmar</button> -->
-								
-								<button type="submit" value="LETSGO" class="btn btn-primary">Procesar</button>
-							</form>
-					
-						</div>
-					
-					</div>
+					<span th:if="${#lists.isEmpty(pedidosDTO)} == true">No hay pedidos pendientes.</span>
 					
 				</div>
-				
-				<!--
-				<div class="card">
-				
-					<div class="card-body">
-				        
-
-						<h4 class="card-title">Pedido ID <span th:text="${pedido.id}"></span></h4>
-				        <p class="card-text">Proveedor: $ <span th:text="${pedido.proveedor}"></span> </p>
-				        <p class="card-text">Cantidad: $ <span th:text="${pedido.cantidadPedida}"></span> </p>
-						<p class="card-text">Producto: $ <span th:text="${producto.nombreProducto}"></span> </p>
-				        <p class="card-text">Usuario: $ <span th:text="${producto.nombreUsuario}"></span> </p>
-				
-					</div>
-				
-				</div>
-				
-				
-				-->
 			</div>
 		</div>
 		
