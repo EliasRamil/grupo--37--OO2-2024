@@ -7,22 +7,7 @@
 </head>
 <body>
 	
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" th:href="@{/admin}">INICIO</a>
-	  
-
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		
-	    <ul class="navbar-nav mr-auto">
-	    </ul>
-		
-		<form th:action="@{/logout}"  method="post">
-			<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
-		</form>
-	  </div>
-	</nav>
-	
-	
+	<div th:replace="fragments/headers :: header-admin">HEADER HERE</div>
 	
 	<div class="container">
 		<div class="row">
