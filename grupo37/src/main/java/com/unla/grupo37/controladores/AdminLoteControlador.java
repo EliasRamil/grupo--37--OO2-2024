@@ -16,6 +16,7 @@ import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 import com.unla.grupo37.dtos.PedidoDTO;
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Pedido;
+import com.unla.grupo37.servicios.ILoteServicio;
 import com.unla.grupo37.servicios.IPedidoServicio;
 import com.unla.grupo37.servicios.IProductoServicio;
 import com.unla.grupo37.servicios.IServicioGenerico;
@@ -27,13 +28,13 @@ import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 public class AdminLoteControlador extends AbstractAdminVista {
 	
 	private IPedidoServicio pedidoServicio;
-	private IProductoServicio productoServicio;
+	private ILoteServicio loteServicio;
 	private UsuarioRolServicio usuarioRolServicio;
 	private UsuarioServicio u;
 	
-	public AdminLoteControlador(IPedidoServicio pedidoServicio, IProductoServicio productoServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
+	public AdminLoteControlador(IPedidoServicio pedidoServicio, ILoteServicio loteServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
 		this.pedidoServicio = pedidoServicio;
-		this.productoServicio = productoServicio;
+		this.loteServicio = loteServicio;
 		this.usuarioRolServicio = usuarioRolServicio;
 		this.u = u;
 	}
@@ -46,7 +47,7 @@ public class AdminLoteControlador extends AbstractAdminVista {
 		
 		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.ADMIN_LOTE);
 		//List<Pedido> listaPedidos = pedidoServicio.findAll();
-		List<PedidoDTO> listaPedidos = pedidoServicio.findAllSimple();
+		List<PedidoDTO> listaPedidos = pedidoServicio.findAllSimple(true);
 		mAV.addObject("pedidosDTO", listaPedidos);
 		
         return mAV;
@@ -66,7 +67,17 @@ public class AdminLoteControlador extends AbstractAdminVista {
 	        idCliente = (u.traerUsuario(username)).getId();
 	    }
 	    
-	    System.out.println("alguien le dio al pedido id "+id); // TODO hacer que funcione de verdad
+	    //System.out.println("alguien le dio al pedido id "+id); // TODO hacer que funcione de verdad
+	    
+	    int idInt = Integer.parseInt(id);
+	    
+	    Pedido pd = pedidoServicio.findById(idInt);
+	    if (pd == null) throw new Exception("Pedido inexistente");
+	    
+	    loteServicio.nuevoLoteDesdePedido(pd);
+	    
+	    //pd.setProcesado(true);
+	    //pedidoServicio.updateOne(pd, idInt);
 	    
 	    //Pedido pedido = new Pedido(proveedor, Integer.parseInt(cantidad), productoServicio.findByIdProducto(Integer.parseInt(id)),
 		//usuarioRolServicio.getClienteById(idCliente), null);

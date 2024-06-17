@@ -7,6 +7,6 @@ import com.unla.grupo37.entidades.Pedido;
 
 public interface IPedidoServicio extends IServicioGenerico<Pedido> {
 	
-	List<PedidoDTO> findAllSimple();
+	List<PedidoDTO> findAllSimple(boolean soloSinProcesar);
 	
 }

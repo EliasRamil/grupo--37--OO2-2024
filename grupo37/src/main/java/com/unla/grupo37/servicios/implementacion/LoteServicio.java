@@ -15,16 +15,20 @@ import com.unla.grupo37.entidades.Pedido;
 import com.unla.grupo37.entidades.Producto;
 import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.ILoteRepositorio;
+import com.unla.grupo37.repositorios.IPedidoRepositorio;
+import com.unla.grupo37.servicios.ILoteServicio;
+import com.unla.grupo37.servicios.IPedidoServicio;
 import com.unla.grupo37.servicios.IServicioGenerico;
 
 @Service
 @Transactional
-public class LoteServicio implements IServicioGenerico<LoteDTO> {
+public class LoteServicio implements ILoteServicio {
 	
 	// TODO No hay que usar DTOs
 	
 	@Autowired
 	private ILoteRepositorio r;
+	//private static IPedidoServicio pds = new PedidoServicio();
 	private ModelMapper mM = new ModelMapper();
 
 	@Override
@@ -92,8 +96,9 @@ public class LoteServicio implements IServicioGenerico<LoteDTO> {
 	 * En base al <code>Pedido</code> dado, crea un <code>Lote</code> y modifica sus campos de acuerdo al pedido.
 	 * @param pd El <code>Pedido</code> en cuestion.
 	 * @return Un booleano que indica si el procesamiento fue exitoso.
+	 * @throws Exception 
 	 */
-	public boolean procesarPedido(Pedido pd) {
+	public boolean nuevoLoteDesdePedido(Pedido pd) throws Exception {
 		Lote lot = new Lote();
 		
 		lot.setPedido(pd);
@@ -103,8 +108,7 @@ public class LoteServicio implements IServicioGenerico<LoteDTO> {
 		// TODO lot.setPrecioProducto(???);
 		lot = r.save(lot);
 		
-		//Stock sk = lot.getProducto().getStock();
-		//sk.setCantidadActual(sk.getCantidadActual() + lot.getCantidadRecibida());
+		// TODO poner logica de pedido aca... como?
 		
 		return true;
 	}

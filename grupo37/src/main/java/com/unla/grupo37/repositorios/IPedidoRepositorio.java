@@ -14,9 +14,17 @@ import com.unla.grupo37.entidades.Producto;
 public interface IPedidoRepositorio extends JpaRepository<Pedido, Long> {
 	
 	@Query("FROM Pedido pd INNER JOIN FETCH pd.producto INNER JOIN FETCH pd.admin")
-    Producto getAllPedidosWithDetails();
+	List<Pedido> getAllPedidosWithDetails();
+	
+	@Query("FROM Pedido pd "
+			+ "INNER JOIN FETCH pd.producto "
+			+ "INNER JOIN FETCH pd.admin "
+			+ "LEFT JOIN Lote lot ON pd = lot.pedido "
+			+ "WHERE lot.id is null "
+			+ "")
+	List<Pedido> getAllUnprocessedPedidosWithDetails();
 	
 	@Query("FROM Pedido pd INNER JOIN FETCH pd.producto INNER JOIN FETCH pd.admin WHERE pd.id = :id")
-    Producto getPedidoWithDetailsById(@Param("id") Long id);
+    Pedido getPedidoWithDetailsById(@Param("id") Long id);
 	
 }

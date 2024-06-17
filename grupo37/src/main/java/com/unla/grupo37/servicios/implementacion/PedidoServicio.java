@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.unla.grupo37.dtos.PedidoDTO;
 import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.entidades.Pedido;
+import com.unla.grupo37.repositorios.ILoteRepositorio;
 import com.unla.grupo37.repositorios.IPedidoRepositorio;
 import com.unla.grupo37.servicios.IPedidoServicio;
 import com.unla.grupo37.servicios.IServicioGenerico;
@@ -24,6 +25,7 @@ public class PedidoServicio implements IPedidoServicio {
 	
 	@Autowired
 	private IPedidoRepositorio repo;
+	private ILoteRepositorio loterepo;
 	private static ModelMapper mm = new ModelMapper();
 	
 	static {
@@ -41,11 +43,16 @@ public class PedidoServicio implements IPedidoServicio {
 	    return repo.findAll(); // Obtener todos los registros de Pedido del repositorio
 	}
 	@Override
-	public List<PedidoDTO> findAllSimple() {
-		List<Pedido> todo = findAll();
+	public List<PedidoDTO> findAllSimple(boolean soloSinProcesar) {
+		//List<Pedido> todo = findAll();
+		List<Pedido> todo;
+		
+		if (soloSinProcesar) todo = repo.getAllUnprocessedPedidosWithDetails();
+		else todo = repo.getAllPedidosWithDetails();
 		
 		List<PedidoDTO> todoDTO = new ArrayList<PedidoDTO>();
 		for (Pedido pd : todo) {
+			//if (soloSinProcesar) if (pd.isProcesado()) continue;
 			todoDTO.add(mm.map(pd, PedidoDTO.class));
 		}
 		
