@@ -23,15 +23,15 @@ import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 
 @Controller
-@RequestMapping("/admin/pedido")
-public class AdminPedidoControlador extends AbstractAdminVista {
+@RequestMapping("/admin/lote")
+public class AdminLoteControlador extends AbstractAdminVista {
 	
 	private IPedidoServicio pedidoServicio;
 	private IProductoServicio productoServicio;
 	private UsuarioRolServicio usuarioRolServicio;
 	private UsuarioServicio u;
 	
-	public AdminPedidoControlador(IPedidoServicio pedidoServicio, IProductoServicio productoServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
+	public AdminLoteControlador(IPedidoServicio pedidoServicio, IProductoServicio productoServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
 		this.pedidoServicio = pedidoServicio;
 		this.productoServicio = productoServicio;
 		this.usuarioRolServicio = usuarioRolServicio;
@@ -39,19 +39,20 @@ public class AdminPedidoControlador extends AbstractAdminVista {
 	}
 
 	@GetMapping("")
-    public ModelAndView pedido() {
+    public ModelAndView lote() {
 		String aux = permisoVista();
 		
-		if (!aux.equals("Ok")) return new ModelAndView(aux);
+		if (!aux.equals("Ok")) return new ModelAndView(aux); // NUH UH
 		
-		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.ADMIN_PEDIDO);
-		List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
-		mAV.addObject("productos", listaProductos);
+		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.ADMIN_LOTE);
+		List<Pedido> listaPedidos = pedidoServicio.findAll(); // TODO Usar DTOs
+		mAV.addObject("pedidos", listaPedidos);
 		
         return mAV;
     }
 	@PostMapping("{id}")
-	public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
+	//public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
+	public ModelAndView realizarPedido() throws Exception {
 		int idCliente = 0;
 
 	    // Obtener el nombre de usuario del usuario autenticado
@@ -62,10 +63,11 @@ public class AdminPedidoControlador extends AbstractAdminVista {
 	        idCliente = (u.traerUsuario(username)).getId();
 	    }
 	    
-	    Pedido pedido = new Pedido(proveedor, Integer.parseInt(cantidad), productoServicio.findByIdProducto(Integer.parseInt(id)),
-		usuarioRolServicio.getClienteById(idCliente), null);
-	    pedidoServicio.saveOne(pedido);
+	    //Pedido pedido = new Pedido(proveedor, Integer.parseInt(cantidad), productoServicio.findByIdProducto(Integer.parseInt(id)),
+		//usuarioRolServicio.getClienteById(idCliente), null);
+	    //pedidoServicio.saveOne(pedido);
 		
-		return pedido(); // ;)
+		return lote();
 	}
+	
 }
