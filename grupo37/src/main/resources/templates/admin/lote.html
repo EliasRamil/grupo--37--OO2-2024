@@ -31,20 +31,20 @@
 				
 				<span th:if="${#lists.isEmpty(pedidos)} == true">No hay pedidos pendientes.</span>
 				
-				<div class="card-deck" th:each="pedido : ${pedidos}">
+				<div class="card-deck" th:each="pedidodto : ${pedidosDTO}">
 					
 					<div class="card">
 					
 						<div class="card-body">
 					        
-							<h4 class="card-title">Pedido ID <span th:text="${pedido.id}"></span></h4>
+							<h4 class="card-title">Pedido ID <span th:text="${pedidodto.id}"></span></h4>
 							<p>
-								<span class="card-text">Producto: <span th:text="${pedido.producto.nombre}"></span></span></br>
-								<span class="card-text">Cantidad: <span th:text="${pedido.cantidadPedida}"></span></span></br>
-								<span class="card-text">Proveedor: <span th:text="${pedido.proveedor}"></span></span></br>
+								<span class="card-text">Producto: <span th:text="${pedidodto.nombreProducto}"></span></span></br>
+								<span class="card-text">Cantidad: <span th:text="${pedidodto.cantidadPedida}"></span></span></br>
+								<span class="card-text">Proveedor: <span th:text="${pedidodto.proveedor}"></span></span></br>
 							</p>
 							
-					        <span class="card-text">Pedido por: <span th:text="${pedido.admin.nombreDeUsuario}"></span> </span>
+					        <span class="card-text">Pedido por: <span th:text="${pedidodto.nombreAdmin}"></span> </span>
 					
 						</div>
 					

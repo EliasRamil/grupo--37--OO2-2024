@@ -45,8 +45,9 @@ public class AdminLoteControlador extends AbstractAdminVista {
 		if (!aux.equals("Ok")) return new ModelAndView(aux); // NUH UH
 		
 		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.ADMIN_LOTE);
-		List<Pedido> listaPedidos = pedidoServicio.findAll(); // TODO Usar DTOs
-		mAV.addObject("pedidos", listaPedidos);
+		//List<Pedido> listaPedidos = pedidoServicio.findAll();
+		List<PedidoDTO> listaPedidos = pedidoServicio.findAllSimple();
+		mAV.addObject("pedidosDTO", listaPedidos);
 		
         return mAV;
     }

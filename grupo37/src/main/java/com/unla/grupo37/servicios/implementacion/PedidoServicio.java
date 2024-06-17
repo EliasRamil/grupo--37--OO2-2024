@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unla.grupo37.dtos.PedidoDTO;
 import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.entidades.Pedido;
 import com.unla.grupo37.repositorios.IPedidoRepositorio;
@@ -23,11 +24,29 @@ public class PedidoServicio implements IPedidoServicio {
 	
 	@Autowired
 	private IPedidoRepositorio repo;
-	//private ModelMapper mM = new ModelMapper();
+	private ModelMapper mm = new ModelMapper();
 
 	@Override
 	public List<Pedido> findAll() {
 	    return repo.findAll(); // Obtener todos los registros de Pedido del repositorio
+	}
+	@Override
+	public List<PedidoDTO> findAllSimple() {
+		List<Pedido> todo = findAll();
+		mm.createTypeMap(Pedido.class, PedidoDTO.class)
+			.addMapping(Pedido::getId, PedidoDTO::setId)
+			.addMapping(Pedido::getCantidadPedida, PedidoDTO::setCantidadPedida)
+			.addMapping(Pedido::getProveedor, PedidoDTO::setProveedor)
+			.addMapping(src -> src.getProducto().getNombre(), PedidoDTO::setNombreProducto)
+			.addMapping(src -> src.getAdmin().getNombreDeUsuario(), PedidoDTO::setNombreAdmin)		
+		;
+		
+		List<PedidoDTO> todoDTO = new ArrayList<PedidoDTO>();
+		for (Pedido pd : todo) {
+			todoDTO.add(mm.map(pd, PedidoDTO.class));
+		}
+		
+		return todoDTO;
 	}
 
 	@Override
