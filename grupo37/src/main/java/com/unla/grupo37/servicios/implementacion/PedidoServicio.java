@@ -24,7 +24,17 @@ public class PedidoServicio implements IPedidoServicio {
 	
 	@Autowired
 	private IPedidoRepositorio repo;
-	private ModelMapper mm = new ModelMapper();
+	private static ModelMapper mm = new ModelMapper();
+	
+	static {
+		mm.createTypeMap(Pedido.class, PedidoDTO.class)
+				.addMapping(Pedido::getId, PedidoDTO::setId)
+				.addMapping(Pedido::getCantidadPedida, PedidoDTO::setCantidadPedida)
+				.addMapping(Pedido::getProveedor, PedidoDTO::setProveedor)
+				.addMapping(src -> src.getProducto().getNombre(), PedidoDTO::setNombreProducto)
+				.addMapping(src -> src.getAdmin().getNombreDeUsuario(), PedidoDTO::setNombreAdmin)		
+			;
+	}
 
 	@Override
 	public List<Pedido> findAll() {
@@ -33,13 +43,6 @@ public class PedidoServicio implements IPedidoServicio {
 	@Override
 	public List<PedidoDTO> findAllSimple() {
 		List<Pedido> todo = findAll();
-		mm.createTypeMap(Pedido.class, PedidoDTO.class)
-			.addMapping(Pedido::getId, PedidoDTO::setId)
-			.addMapping(Pedido::getCantidadPedida, PedidoDTO::setCantidadPedida)
-			.addMapping(Pedido::getProveedor, PedidoDTO::setProveedor)
-			.addMapping(src -> src.getProducto().getNombre(), PedidoDTO::setNombreProducto)
-			.addMapping(src -> src.getAdmin().getNombreDeUsuario(), PedidoDTO::setNombreAdmin)		
-		;
 		
 		List<PedidoDTO> todoDTO = new ArrayList<PedidoDTO>();
 		for (Pedido pd : todo) {

@@ -51,9 +51,11 @@ public class AdminLoteControlador extends AbstractAdminVista {
 		
         return mAV;
     }
-	@PostMapping("{id}")
+	
 	//public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
-	public ModelAndView realizarPedido() throws Exception {
+	
+	@PostMapping("{id}")
+	public String procesarPedido(@PathVariable(value="id") String id) throws Exception {
 		int idCliente = 0;
 
 	    // Obtener el nombre de usuario del usuario autenticado
@@ -64,11 +66,13 @@ public class AdminLoteControlador extends AbstractAdminVista {
 	        idCliente = (u.traerUsuario(username)).getId();
 	    }
 	    
+	    System.out.println("alguien le dio al pedido id "+id); // TODO hacer que funcione de verdad
+	    
 	    //Pedido pedido = new Pedido(proveedor, Integer.parseInt(cantidad), productoServicio.findByIdProducto(Integer.parseInt(id)),
 		//usuarioRolServicio.getClienteById(idCliente), null);
 	    //pedidoServicio.saveOne(pedido);
 		
-		return lote();
+		return "redirect:/admin/lote";
 	}
 	
 }

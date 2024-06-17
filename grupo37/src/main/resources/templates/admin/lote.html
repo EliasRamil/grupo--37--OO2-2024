@@ -45,6 +45,14 @@
 							</p>
 							
 					        <span class="card-text">Pedido por: <span th:text="${pedidodto.nombreAdmin}"></span> </span>
+							
+							<form th:action="@{'/admin/lote/'+${pedidodto.id}}" method="post">
+						    	<!-- <p>Id del Pedido a recibir:  <input type="number"/> </p> -->
+						    	<!-- <p>Precio:  <input type="number"/> </p> -->
+						    	<!-- <button type="submit" value="value" class="btn btn-primary">Confirmar</button> -->
+								
+								<button type="submit" value="LETSGO" class="btn btn-primary">Procesar</button>
+							</form>
 					
 						</div>
 					
@@ -68,11 +76,7 @@
 				
 				</div>
 				
-				<form th:action="@{'/compra/'+${pedido.id}}" method="post">
-				    <p>Id del Pedido a recibir:  <input type="number"/> </p> 
-				    <p>Precio:  <input type="number"/> </p> 
-				    <button type="submit" value="value" class="btn btn-primary">Confirmar</button>
-				</form>
+				
 				-->
 			</div>
 		</div>
