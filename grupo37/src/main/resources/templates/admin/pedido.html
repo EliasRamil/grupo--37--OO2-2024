@@ -37,7 +37,7 @@
 	
 							<h5 class="card-title" th:text="${producto.nombre}">Card title</h5>
 							<p class="card-text" th:text="${producto.descripcion}">Some quick example</p>
-							<label for="cantidad">Stock actual: ( <span th:text="${producto.cantidadActual}"></span> ):</label>
+							<label for="cantidad">Stock actual: <span th:text="${producto.cantidadActual}"></span></label>
 	
 							<form th:action="@{'/admin/pedido/'+${producto.id}}" method="post">
 								<p>Cantidad: <input type="number" name="cantidad" min="1" max="500"/> </p>
