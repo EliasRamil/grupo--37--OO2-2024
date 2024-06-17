@@ -49,13 +49,14 @@
 								<td th:text="${dto.cantidadPedida}">[cant]</td>
 								<td th:text="${dto.proveedor}">[prov]</td>
 								<td th:text="${dto.nombreAdmin}">[admin]</td>
-								<td>
+								<td style="vertical-align: middle;">
 									<form th:action="@{'/admin/lote/'+${dto.id}}" method="post">
 										<!-- <p>Id del Pedido a recibir:  <input type="number"/> </p> -->
 										<!-- <p>Precio:  <input type="number"/> </p> -->
 										<!-- <button type="submit" value="value" class="btn btn-primary">Confirmar</button> -->
 										
 										<button type="submit" value="process" class="btn btn-primary">Crear lote?</button>
+										<input type="number" name="precio" placeholder="Precio unitario" required>
 									</form>
 								</td>
 							</tr>

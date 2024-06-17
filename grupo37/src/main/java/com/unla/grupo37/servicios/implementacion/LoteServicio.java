@@ -24,8 +24,6 @@ import com.unla.grupo37.servicios.IServicioGenerico;
 @Transactional
 public class LoteServicio implements ILoteServicio {
 	
-	// TODO No hay que usar DTOs
-	
 	@Autowired
 	private ILoteRepositorio r;
 	//private static IPedidoServicio pds = new PedidoServicio();
@@ -95,22 +93,23 @@ public class LoteServicio implements ILoteServicio {
 	/**
 	 * En base al <code>Pedido</code> dado, crea un <code>Lote</code> y modifica sus campos de acuerdo al pedido.
 	 * @param pd El <code>Pedido</code> en cuestion.
-	 * @return Un booleano que indica si el procesamiento fue exitoso.
+	 * @param precio El valor del Lote.
+	 * @return El Lote.
 	 * @throws Exception 
 	 */
-	public boolean nuevoLoteDesdePedido(Pedido pd) throws Exception {
+	public Lote nuevoLoteDesdePedido(Pedido pd, double precio) throws Exception {
 		Lote lot = new Lote();
 		
 		lot.setPedido(pd);
 		lot.setFechaRecepcion(LocalDateTime.now());
 		lot.setCantidadRecibida(pd.getCantidadPedida());
 		lot.setProducto(pd.getProducto());
-		// TODO lot.setPrecioProducto(???);
+		lot.setPrecioProducto(precio);
 		lot = r.save(lot);
 		
-		// TODO poner logica de pedido aca... como?
+		// TODO modificar stock eventualmente
 		
-		return true;
+		return lot;
 	}
 	
 }

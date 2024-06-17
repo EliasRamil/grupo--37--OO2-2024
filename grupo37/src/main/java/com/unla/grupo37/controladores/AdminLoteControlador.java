@@ -15,11 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 import com.unla.grupo37.dtos.PedidoDTO;
 import com.unla.grupo37.dtos.ProductoDTO;
+import com.unla.grupo37.entidades.Lote;
 import com.unla.grupo37.entidades.Pedido;
+import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.servicios.ILoteServicio;
 import com.unla.grupo37.servicios.IPedidoServicio;
 import com.unla.grupo37.servicios.IProductoServicio;
 import com.unla.grupo37.servicios.IServicioGenerico;
+import com.unla.grupo37.servicios.IStockServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 
@@ -31,10 +34,12 @@ public class AdminLoteControlador extends AbstractAdminVista {
 	private ILoteServicio loteServicio;
 	private UsuarioRolServicio usuarioRolServicio;
 	private UsuarioServicio u;
+	private IStockServicio stockServicio;
 	
-	public AdminLoteControlador(IPedidoServicio pedidoServicio, ILoteServicio loteServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
+	public AdminLoteControlador(IPedidoServicio pedidoServicio, ILoteServicio loteServicio, IStockServicio stockServicio, UsuarioRolServicio usuarioRolServicio, UsuarioServicio u) {
 		this.pedidoServicio = pedidoServicio;
 		this.loteServicio = loteServicio;
+		this.stockServicio = stockServicio;
 		this.usuarioRolServicio = usuarioRolServicio;
 		this.u = u;
 	}
@@ -56,7 +61,7 @@ public class AdminLoteControlador extends AbstractAdminVista {
 	//public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
 	
 	@PostMapping("{id}")
-	public String procesarPedido(@PathVariable(value="id") String id) throws Exception {
+	public String procesarPedido(@PathVariable(value="id") String idStr, @RequestParam(name = "precio") String precioStr) throws Exception {
 		int idCliente = 0;
 
 	    // Obtener el nombre de usuario del usuario autenticado
@@ -67,14 +72,14 @@ public class AdminLoteControlador extends AbstractAdminVista {
 	        idCliente = (u.traerUsuario(username)).getId();
 	    }
 	    
-	    //System.out.println("alguien le dio al pedido id "+id); // TODO hacer que funcione de verdad
+	    int id = Integer.parseInt(idStr);
+	    double precio = Double.parseDouble(precioStr);
 	    
-	    int idInt = Integer.parseInt(id);
-	    
-	    Pedido pd = pedidoServicio.findById(idInt);
+	    Pedido pd = pedidoServicio.findById(id);
 	    if (pd == null) throw new Exception("Pedido inexistente");
 	    
-	    loteServicio.nuevoLoteDesdePedido(pd);
+	    Lote lot = loteServicio.nuevoLoteDesdePedido(pd, precio);
+	    stockServicio.actualizarStock(lot);
 	    
 	    //pd.setProcesado(true);
 	    //pedidoServicio.updateOne(pd, idInt);

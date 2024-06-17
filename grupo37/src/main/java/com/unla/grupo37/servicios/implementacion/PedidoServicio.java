@@ -21,8 +21,6 @@ import com.unla.grupo37.servicios.IServicioGenerico;
 @Transactional
 public class PedidoServicio implements IPedidoServicio {
 	
-	// TODO No hay que usar DTOs
-	
 	@Autowired
 	private IPedidoRepositorio repo;
 	private ILoteRepositorio loterepo;
