@@ -68,15 +68,4 @@ public class AdminPedidoControlador extends AbstractAdminVista {
 		
 		return AyudanteRutasVistas.ADMIN_PEDIDO;
 	}
-	
-	@GetMapping("/lote")
-    public String lote() {
-		String aux = permisoVista();
-		
-		if(aux.equals("Ok"))
-			aux = AyudanteRutasVistas.ADMIN_LOTE;
-		
-        return aux;
-    }
-	
 }

@@ -59,15 +59,4 @@ public class AdminControlador {
 		
 		return new ModelAndView(aux);
 	}
-	
-	@GetMapping("/lote")
-    public String lote() {
-		String aux = permisoVista();
-		
-		if(aux.equals("Ok"))
-			aux = AyudanteRutasVistas.ADMIN_LOTE;
-		
-        return aux;
-    }
-	
 }
