@@ -71,6 +71,7 @@ public class ProductoServicio implements IProductoServicio {
 		try {
 			Producto p = mM.map(dto, Producto.class);
 			p.setStock(new Stock(dto.getCantidadActual(), dto.getCantidadCritica()));
+			p.setActivo(true);
 			rP.save(p);
 			retorno = mM.map(p, ProductoDTO.class);
 			retorno.setCantidadActual(p.getStock().getCantidadActual());

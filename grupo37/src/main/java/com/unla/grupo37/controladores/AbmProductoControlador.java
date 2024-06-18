@@ -14,11 +14,11 @@ import com.unla.grupo37.servicios.IProductoServicio;
 
 @Controller
 @RequestMapping("/admin/abm")
-public class AbmProducto {
+public class AbmProductoControlador {
 	
 	private IProductoServicio pS;
 
-	public AbmProducto(IProductoServicio pS) {
+	public AbmProductoControlador(IProductoServicio pS) {
 		this.pS = pS;
 	}
 	
@@ -42,31 +42,19 @@ public class AbmProducto {
 		
 		mav.addObject("producto", new ProductoDTO());
 
-		//return "admin/CrearProducto";
 		return mav;
 	}
 	
 	@PostMapping("/crear")
-	public String crearPOST(@ModelAttribute("producto") ProductoDTO producto) {
-		/*String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
-		
-		if(aux.equals("Ok"))
-			aux = com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ALTA;
-		
-		pS.saveOne(producto);
-		
-		return com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ABM;*/
+	public String crearPOST(@ModelAttribute("producto") ProductoDTO producto) throws Exception {
 		
 		try {
 	        pS.saveOne(producto);
-	        return "redirect:/admin/abm"; // Redirigir a la página de administración después de crear el producto
 	    } catch (Exception e) {
-	        // Manejo de excepciones
-	        // Puedes mostrar un mensaje de error o redirigir a una página de error
-	        return "redirect:/error/500";
+	    	throw new Exception(e.getMessage());
 	    }
 		
-		
+		return com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ABM_ROOT;
 	}
 	
 	
