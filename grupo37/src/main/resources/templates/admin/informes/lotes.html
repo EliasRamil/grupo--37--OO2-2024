@@ -8,7 +8,7 @@
 <body>
 	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" th:href="@{/admin}">GUAT!</a>
+	  <a class="navbar-brand" th:href="@{/admin/informes}">Volver a Informes</a>
 	  
 
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -27,7 +27,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1>informeishon loteishon</h1><br>
+				<h1>Observacion de lotes por producto</h1><br>
 				
 				<form th:action="@{'/admin/informes/lotes'}" method="get">
 					<select name="producto" id="producto">
