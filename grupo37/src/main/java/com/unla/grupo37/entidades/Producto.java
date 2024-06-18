@@ -95,5 +95,13 @@ public class Producto {
 	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
+
+	public Set<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Set<Compra> compras) {
+		this.compras = compras;
+	}
 	
 }
