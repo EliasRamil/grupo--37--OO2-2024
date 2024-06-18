@@ -24,7 +24,7 @@ import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 
 @Controller
 @RequestMapping("/admin/pedido")
-public class AdminPedidoControlador extends AbstractAdminVista {
+public class AdminPedidoControlador {
 	
 	private IPedidoServicio pedidoServicio;
 	private IProductoServicio productoServicio;
@@ -40,7 +40,7 @@ public class AdminPedidoControlador extends AbstractAdminVista {
 
 	@GetMapping("")
     public ModelAndView pedido() {
-		String aux = permisoVista();
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
 		
 		if (!aux.equals("Ok")) return new ModelAndView(aux);
 		

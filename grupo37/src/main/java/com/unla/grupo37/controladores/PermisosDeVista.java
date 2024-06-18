@@ -3,8 +3,17 @@ package com.unla.grupo37.controladores;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public abstract class AbstractAdminVista {
-	protected String permisoVista() {
+public class PermisosDeVista {
+	
+	private static final PermisosDeVista instancia = new PermisosDeVista();
+	
+	private PermisosDeVista() {};
+	
+	public static PermisosDeVista getInstancia() {
+		return instancia;
+	}
+	
+	public String permisoVista() {
 		String r = "error/403";
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
@@ -15,4 +24,5 @@ public abstract class AbstractAdminVista {
 		
 		return r;
 	}
+	
 }

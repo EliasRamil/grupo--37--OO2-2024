@@ -28,7 +28,7 @@ import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
 
 @Controller
 @RequestMapping("/admin/lote")
-public class AdminLoteControlador extends AbstractAdminVista {
+public class AdminLoteControlador {
 	
 	private IPedidoServicio pedidoServicio;
 	private ILoteServicio loteServicio;
@@ -46,7 +46,7 @@ public class AdminLoteControlador extends AbstractAdminVista {
 
 	@GetMapping("")
     public ModelAndView lote() {
-		String aux = permisoVista();
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
 		
 		if (!aux.equals("Ok")) return new ModelAndView(aux); // NUH UH
 		
