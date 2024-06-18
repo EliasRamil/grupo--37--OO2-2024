@@ -73,7 +73,7 @@ public class CompraServicio implements ICompraServicio {
 		}
 	}
 	
-	@Override
+	/*@Override
 	@Transactional
 	public boolean deleteById(long id)throws Exception{
 		try {
@@ -90,7 +90,7 @@ public class CompraServicio implements ICompraServicio {
 		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}
-	}
+	}*/
 	
 	
 	

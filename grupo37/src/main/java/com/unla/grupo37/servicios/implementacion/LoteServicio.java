@@ -82,11 +82,11 @@ public class LoteServicio implements ILoteServicio {
 		return retorno;
 	}
 
-	@Override
+	/*@Override
 	public boolean deleteById(long id) throws Exception {
 		//Se realiza de esta forma porque en el Lote no se tienen que eliminar elementos.
 		throw new Exception("No se puede eliminar el Lote");
-	}
+	}*/
 	
 	
 	

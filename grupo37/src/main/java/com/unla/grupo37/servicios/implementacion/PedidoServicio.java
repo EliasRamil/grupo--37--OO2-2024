@@ -92,11 +92,11 @@ public class PedidoServicio implements IPedidoServicio {
 		return pd;
 	}
 
-	@Override
+	/*@Override
 	public boolean deleteById(long id) throws Exception {
 		// TODO PedidoServicio.deleteById?
 		throw new Exception("No se puede eliminar el Pedido");
 		//return false;
-	}
+	}*/
 	
 }

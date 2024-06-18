@@ -106,18 +106,6 @@ public class ProductoServicio implements IProductoServicio {
 	}
 
 	@Override
-	public boolean deleteById(long id) throws Exception {
-		Producto p = rP.findById(id).orElse(null);
-		
-		if(p == null)
-			throw new Exception("No existe el Producto con el id: " + id);
-		
-		p.setActivo(false);
-		
-		return true;
-	}
-
-	@Override
 	public List<ProductoDTO> findAllbyActivo() {
 		List<Producto> productos = rP.findAll();
 		List<ProductoDTO> productosDTOs = new ArrayList<>();

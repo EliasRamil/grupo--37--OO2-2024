@@ -77,11 +77,11 @@ public class StockServicio implements IStockServicio {
 		return retorno;
 	}
 
-	@Override
+	/*@Override
 	public boolean deleteById(long id) throws Exception {
 		//Se realiza de esta forma porque en el Stock no se tienen que eliminar elementos.
 		throw new Exception("No se puede eliminar el Stock");
-	}
+	}*/
 	
 	/**
 	 * En base a un <code>Lote</code>, obtiene el <code>Stock</code> del producto y actualiza la cantidad.

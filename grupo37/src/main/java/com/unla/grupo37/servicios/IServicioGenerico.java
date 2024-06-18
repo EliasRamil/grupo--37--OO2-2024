@@ -7,5 +7,4 @@ public interface IServicioGenerico<E> {
     E findById(long id) throws Exception;
     E saveOne(E dto) throws Exception;
     E updateOne(E dto, long id) throws Exception;
-    boolean deleteById(long id) throws Exception;
 }
