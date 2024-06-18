@@ -53,9 +53,9 @@
                                 <td th:text="${producto.descripcion}"></td>
                                 <td th:text="${producto.precio}"></td>
                                 <td>
-									<a class="btn btn-primary" th:href="@{'/admin/abm/modificar' + ${producto.id} }">Editar</a>
+									<a class="btn btn-primary" th:href="@{'/admin/abm/editar/' + ${producto.id} }">Editar</a>
 									&nbsp;
-									<a class="btn btn-danger" th:href="@{'/admin/abm/eliminar' + ${producto.id} }">Eliminar</a>
+									<a class="btn btn-danger" th:href="@{'/admin/abm/eliminar/' + ${producto.id} }">Eliminar</a>
 								</td>
 								
                             </tr>
