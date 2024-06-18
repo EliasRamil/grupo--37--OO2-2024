@@ -19,6 +19,6 @@ public interface IProductoRepositorio extends JpaRepository<Producto, Long> {
     Producto findProductoWithStockById(@Param("id") Long id);
 	
 	@Query("FROM Producto p WHERE p.nombre = :nombre")
-	List<Producto> findProductosByNombre(@Param("nombre") String nombre);
+	Producto findProductoByNombre(@Param("nombre") String nombre);
 
 }

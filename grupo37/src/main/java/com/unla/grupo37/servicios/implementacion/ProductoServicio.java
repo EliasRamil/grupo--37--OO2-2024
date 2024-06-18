@@ -65,7 +65,7 @@ public class ProductoServicio implements IProductoServicio {
 	public ProductoDTO saveOne(ProductoDTO dto) throws Exception {
 		ProductoDTO retorno = null;
 		
-		if(rP.findProductosByNombre(dto.getNombre()).size() != 0)
+		if(rP.findProductoByNombre(dto.getNombre()) != null)
 			throw new Exception("Ya existe un producto con el nombre" + dto.getNombre());
 		
 		try {
@@ -87,20 +87,20 @@ public class ProductoServicio implements IProductoServicio {
 	public ProductoDTO updateOne(ProductoDTO dto, long id) throws Exception {
 		Producto aux = rP.findProductoWithStockById(id);
 		
-		if(aux == null)
-			throw new Exception("No existe el Producto con el id: " + id);
-		
-		Producto p = mM.map(aux, Producto.class);
-		p.getStock().setCantidadCritica(dto.getCantidadCritica());
-		
-		if(rP.findProductosByNombre(dto.getNombre()).size() > 1)
+		if(rP.findProductoByNombre(dto.getNombre()).getId() != dto.getId())
 			throw new Exception("Ya existe otro producto con el nombre" + dto.getNombre());
 		
-		rP.save(p);
+		aux.setNombre(dto.getNombre());
+		aux.setActivo(dto.isActivo());
+		aux.setDescripcion(dto.getDescripcion());
+		aux.setPrecio(dto.getPrecio());
+		aux.getStock().setCantidadCritica(dto.getCantidadCritica());
 		
-		ProductoDTO retorno = mM.map(p, ProductoDTO.class);
-		retorno.setCantidadActual(p.getStock().getCantidadActual());
-		retorno.setCantidadCritica(p.getStock().getCantidadCritica());
+		rP.save(aux);
+		
+		ProductoDTO retorno = mM.map(aux, ProductoDTO.class);
+		retorno.setCantidadActual(aux.getStock().getCantidadActual());
+		retorno.setCantidadCritica(aux.getStock().getCantidadCritica());
 		
 		return retorno;
 	}
