@@ -14,7 +14,7 @@ public class PermisosDeVista {
 	}
 	
 	public String permisoVista() {
-		String r = "error/403";
+		String r = com.unla.grupo37.ayudante.AyudanteRutasVistas.E_403;
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 	    if (principal instanceof UserDetails) {

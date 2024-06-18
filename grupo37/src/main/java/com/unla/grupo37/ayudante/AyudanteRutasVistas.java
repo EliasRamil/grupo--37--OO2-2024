@@ -19,4 +19,6 @@ public class AyudanteRutasVistas {
 	public final static String COMPRA_ROOT = "redirect:/compra";
 	public final static String ADMIN_ROOT = "redirect:/admin";
 	
+	//ERROR:
+	public final static String E_403 = "error/403";
 }
