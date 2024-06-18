@@ -17,6 +17,8 @@ public class AyudanteRutasVistas {
 	public final static String ADMIN_ALTA = "admin/CrearProducto";
 	public final static String ADMIN_MODIFICACION = "admin/ActualizarProducto";
 	
+	public final static String ADMIN_INFORMES_LOTES = "admin/informes/lotes";
+	
 	//REDIRECCIONAR:
 	public final static String LOGIN_ROOT = "redirect:/login";
 	public final static String COMPRA_ROOT = "redirect:/compra";

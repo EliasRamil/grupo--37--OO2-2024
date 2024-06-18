@@ -89,6 +89,19 @@ public class LoteServicio implements ILoteServicio {
 	}*/
 	
 	
+	@Override
+	public List<LoteDTO> findLotesByProductoId(long id) {
+		List<Lote> lista = r.findAllLotesOfProducto(id);
+		List<LoteDTO> listaDTO = new ArrayList<LoteDTO>();
+		
+		for (Lote lot : lista) {
+			LoteDTO dto = mM.map(lot, LoteDTO.class);
+			listaDTO.add( dto );
+		}
+		
+		return listaDTO;
+	}
+	
 	
 	/**
 	 * En base al <code>Pedido</code> dado, crea un <code>Lote</code> y modifica sus campos de acuerdo al pedido.

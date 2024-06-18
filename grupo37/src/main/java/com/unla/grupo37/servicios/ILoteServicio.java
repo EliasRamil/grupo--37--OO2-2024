@@ -10,5 +10,6 @@ import com.unla.grupo37.entidades.Pedido;
 public interface ILoteServicio extends IServicioGenerico<LoteDTO> {
 	
 	Lote nuevoLoteDesdePedido(Pedido pd, double precio) throws Exception;
+	List<LoteDTO> findLotesByProductoId(long id);
 	
 }
