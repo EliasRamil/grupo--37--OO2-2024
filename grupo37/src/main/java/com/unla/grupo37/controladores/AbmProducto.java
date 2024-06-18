@@ -36,8 +36,18 @@ public class AbmProducto {
 		return m;
 	}
 	
+	@GetMapping("/crear")
+	public ModelAndView crearGET() {
+		ModelAndView mav = new ModelAndView("admin/CrearProducto");
+		
+		mav.addObject("producto", new ProductoDTO());
+
+		//return "admin/CrearProducto";
+		return mav;
+	}
+	
 	@PostMapping("/crear")
-	public String crear(@ModelAttribute("producto") ProductoDTO producto) {
+	public String crearPOST(@ModelAttribute("producto") ProductoDTO producto) {
 		/*String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
 		
 		if(aux.equals("Ok"))
