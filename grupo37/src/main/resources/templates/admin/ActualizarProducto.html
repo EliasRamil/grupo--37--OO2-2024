@@ -48,6 +48,11 @@
                             <label>Precio : </label>
                             <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="ingrese el precio" required>
                         </div>
+						
+						<div class="form-group">
+							 <label>Cantidad actual : </label>
+							 <input type="text" name="cantidadActual" th:field="*{cantidadActual}" class="form-control" readonly="readonly">
+						 </div>
                         
                         <div class="form-group">
                             <label>Cantidad critica : </label>

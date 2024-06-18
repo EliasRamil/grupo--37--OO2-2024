@@ -94,6 +94,7 @@ public class ProductoServicio implements IProductoServicio {
 		aux.setActivo(dto.isActivo());
 		aux.setDescripcion(dto.getDescripcion());
 		aux.setPrecio(dto.getPrecio());
+		aux.getStock().setCantidadActual(dto.getCantidadActual());
 		aux.getStock().setCantidadCritica(dto.getCantidadCritica());
 		
 		rP.save(aux);
