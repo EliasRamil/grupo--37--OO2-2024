@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,7 +39,7 @@ public class AbmProductoControlador {
 	
 	@GetMapping("/crear")
 	public ModelAndView crearGET() {
-		ModelAndView mav = new ModelAndView("admin/CrearProducto");
+		ModelAndView mav = new ModelAndView(com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ALTA);
 		
 		mav.addObject("producto", new ProductoDTO());
 
@@ -57,5 +58,28 @@ public class AbmProductoControlador {
 		return com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ABM_ROOT;
 	}
 	
+	@GetMapping("/editar/{id}")
+	public ModelAndView actualizarGET(@PathVariable Long id) {
+		ModelAndView mav = new ModelAndView(com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_MODIFICACION);
+		
+		try {
+			ProductoDTO p = pS.findById(id);
+			mav.addObject("producto", p);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mav;
+	}
 	
+	@PostMapping("/editar/{id}")
+	public String actualizarPOST(@ModelAttribute("producto") ProductoDTO producto, @PathVariable Long id) {
+		
+		try {
+	        pS.updateOne(producto, id);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ABM_ROOT;
+	}
 }
