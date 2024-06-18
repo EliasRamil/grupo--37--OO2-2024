@@ -21,6 +21,7 @@ public class AyudanteRutasVistas {
 	public final static String LOGIN_ROOT = "redirect:/login";
 	public final static String COMPRA_ROOT = "redirect:/compra";
 	public final static String ADMIN_ROOT = "redirect:/admin";
+	public final static String ADMIN_LOTE_ROOT = "redirect:/admin/lote";
 	
 	//ERROR:
 	public final static String E_403 = "error/403";

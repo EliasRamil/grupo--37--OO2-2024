@@ -18,4 +18,7 @@ public interface IProductoRepositorio extends JpaRepository<Producto, Long> {
 	@Query("FROM Producto p INNER JOIN FETCH p.stock WHERE p.id = :id")
     Producto findProductoWithStockById(@Param("id") Long id);
 	
+	@Query("FROM Producto p WHERE p.nombre = :nombre")
+	List<Producto> findProductosByNombre(@Param("nombre") String nombre);
+
 }

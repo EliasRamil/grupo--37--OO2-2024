@@ -88,7 +88,7 @@ public class AdminLoteControlador {
 		//usuarioRolServicio.getClienteById(idCliente), null);
 	    //pedidoServicio.saveOne(pedido);
 		
-		return "redirect:/admin/lote";
+		return com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_LOTE_ROOT;
 	}
 	
 }

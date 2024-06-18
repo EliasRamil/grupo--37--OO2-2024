@@ -65,6 +65,9 @@ public class ProductoServicio implements IProductoServicio {
 	public ProductoDTO saveOne(ProductoDTO dto) throws Exception {
 		ProductoDTO retorno = null;
 		
+		if(rP.findProductosByNombre(dto.getNombre()).size() != 0)
+			throw new Exception("Ya existe un producto con el nombre" + dto.getNombre());
+		
 		try {
 			Producto p = mM.map(dto, Producto.class);
 			p.setStock(new Stock(dto.getCantidadActual(), dto.getCantidadCritica()));
@@ -75,6 +78,7 @@ public class ProductoServicio implements IProductoServicio {
 		} catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+		
 		return retorno;
 	}
 
@@ -86,8 +90,11 @@ public class ProductoServicio implements IProductoServicio {
 			throw new Exception("No existe el Producto con el id: " + id);
 		
 		Producto p = mM.map(aux, Producto.class);
-		p.getStock().setCantidadActual(dto.getCantidadActual());
 		p.getStock().setCantidadCritica(dto.getCantidadCritica());
+		
+		if(rP.findProductosByNombre(dto.getNombre()).size() > 1)
+			throw new Exception("Ya existe otro producto con el nombre" + dto.getNombre());
+		
 		rP.save(p);
 		
 		ProductoDTO retorno = mM.map(p, ProductoDTO.class);
