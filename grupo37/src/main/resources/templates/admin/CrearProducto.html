@@ -29,7 +29,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
                 <h1 class="text-center">Registrar un producto</h1>
                 <div class="card-body">
-                    <form th:action="@{/admin/abm/crear}" th:objet="${producto}" method="post">
+                    <form th:action="@{/admin/abm/crear}" th:object="${producto}" method="post">
                         <div class="form-group">
                             <label>Nombre : </label>
                             <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="ingrese el nombre" required>
