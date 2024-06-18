@@ -10,9 +10,9 @@ import com.unla.grupo37.entidades.Usuario;
 
 public interface ICompraRepositorio extends JpaRepository<Compra,Serializable>{
 	
-	public abstract Compra findById(int id);
+	/*public abstract Compra findById(int id);
 	public abstract Compra findByFechaCompra(LocalDateTime date);
-	public abstract Compra findByCliente(Usuario usuario);
+	public abstract Compra findByCliente(Usuario usuario);*/
 	
 
 }

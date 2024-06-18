@@ -13,12 +13,12 @@ import com.unla.grupo37.entidades.Producto;
 public interface IProductoRepositorio extends JpaRepository<Producto, Long> {
 
 	@Query("FROM Producto p INNER JOIN FETCH p.stock")
-	List<Producto> findAllProductosWithStock();
+	public abstract List<Producto> findAllProductosWithStock();
 	
 	@Query("FROM Producto p INNER JOIN FETCH p.stock WHERE p.id = :id")
-    Producto findProductoWithStockById(@Param("id") Long id);
+	public abstract Producto findProductoWithStockById(@Param("id") Long id);
 	
 	@Query("FROM Producto p WHERE p.nombre = :nombre")
-	Producto findProductoByNombre(@Param("nombre") String nombre);
+	public abstract Producto findProductoByNombre(@Param("nombre") String nombre);
 
 }

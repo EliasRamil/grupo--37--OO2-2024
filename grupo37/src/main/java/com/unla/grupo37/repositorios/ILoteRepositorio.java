@@ -14,6 +14,6 @@ import com.unla.grupo37.entidades.Lote;
 public interface ILoteRepositorio extends JpaRepository<Lote, Long> {
 	
 	@Query("FROM Lote lot INNER JOIN FETCH Producto prod ON lot.producto = prod WHERE prod.id = :id ORDER BY lot.fechaRecepcion DESC")
-	List<Lote> findAllLotesOfProducto(@Param("id") Long id);
+	public abstract List<Lote> findAllLotesOfProducto(@Param("id") Long id);
 	
 }

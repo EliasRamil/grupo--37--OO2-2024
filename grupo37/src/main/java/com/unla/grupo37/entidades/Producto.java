@@ -1,5 +1,8 @@
 package com.unla.grupo37.entidades;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,11 +30,13 @@ public class Producto {
 	
 	private double precio;
 	private boolean activo = true;
-	
-	//@OneToOne(cascade = CascadeType.ALL,mappedBy = "producto", fetch = FetchType.EAGER)
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_stock", nullable = false)
 	private Stock stock;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="producto")
+	private Set<Compra> compras = new HashSet<>();
 	
 	public Producto() {}
 

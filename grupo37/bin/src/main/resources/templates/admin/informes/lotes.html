@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+	<title>Informes: Lotes</title>
+	
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" th:href="@{/admin/informes}">Volver a Informes</a>
+	  
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		
+	    <ul class="navbar-nav mr-auto">
+	    </ul>
+		
+		<form th:action="@{/logout}"  method="post">
+			<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
+		</form>
+	  </div>
+	</nav>
+	
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1>Observacion de lotes por producto</h1><br>
+				
+				<form th:action="@{'/admin/informes/lotes'}" method="get">
+					<select name="producto" id="producto">
+						<option value="0"> </option>
+						<option th:each="prod : ${prods}"
+							th:value="${prod.id}"
+							th:text="${prod.id + ' - ' + prod.nombre}"
+							th:selected="${currentID == prod.id}"
+							value="bruh">Bruh</option>
+					</select>
+					<button type="submit" value="process" class="btn btn-primary">Ver</button>
+				</form>
+				
+				<span th:if="${lotsDTO == null}">Seleccione un producto...</span>
+				<span th:if="${notvalid == true}">Producto invalido???</span>
+				
+				<div th:if="${lotsDTO != null}" class="container text-center">
+					<table class="table">
+						
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">ID Lote</th>
+								<th scope="col">ID Pedido</th>
+								<th scope="col">Fecha de recepcion</th>
+								<th scope="col">Cantidad recibida</th>
+								<th scope="col">Precio unitario</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto : ${lotsDTO}">
+								<td th:text="${dto.id}">[ID]</td>
+								<td th:text="${dto.pedidoId}">[pdID]</td>
+								<td th:text="${dto.fechaRecepcion}">[recepcion]</td>
+								<td th:text="${dto.cantidadRecibida}">[cant]</td>
+								<td th:text="${dto.precioProducto}">[money]</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				</div>
+				
+				
+				<!--
+				<div class="container text-center">
+					<table class="table">
+						
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">ID Pedido</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Cantidad</th>
+								<th scope="col">Proveedor</th>
+								<th scope="col">Admin</th>
+								<th scope="col">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto : ${pedidosDTO}">
+								<td th:text="${dto.id}">[ID]</td>
+								<td th:text="${dto.nombreProducto}">[prod]</td>
+								<td th:text="${dto.cantidadPedida}">[cant]</td>
+								<td th:text="${dto.proveedor}">[prov]</td>
+								<td th:text="${dto.nombreAdmin}">[admin]</td>
+								<td style="vertical-align: middle;">
+									<form th:action="@{'/admin/lote/'+${dto.id}}" method="post">
+										
+										<button type="submit" value="process" class="btn btn-primary">Crear lote?</button>
+										<input type="number" name="precio" placeholder="Precio unitario" required>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<span th:if="${#lists.isEmpty(pedidosDTO)} == true">No hay pedidos pendientes.</span>
+					
+				</div>
+				-->
+			</div>
+		</div>
+		
+        
+		
+	</div>
+	
+    
+    
+	
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

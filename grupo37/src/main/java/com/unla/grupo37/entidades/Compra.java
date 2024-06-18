@@ -31,7 +31,7 @@ public class Compra {
     @JoinColumn(name = "fk_producto", nullable = false)
     private Producto producto;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_cliente", nullable = false)
     private Usuario cliente;
 
