@@ -52,6 +52,7 @@
 								<th scope="col">ID Lote</th>
 								<th scope="col">ID Pedido</th>
 								<th scope="col">Fecha de recepcion</th>
+								<th scope="col">Proveedor</th>
 								<th scope="col">Cantidad recibida</th>
 								<th scope="col">Precio unitario</th>
 							</tr>
@@ -61,6 +62,7 @@
 								<td th:text="${dto.id}">[ID]</td>
 								<td th:text="${dto.pedidoId}">[pdID]</td>
 								<td th:text="${dto.fechaRecepcion}">[recepcion]</td>
+								<td th:text="${dto.nombreProveedor}">[bywho]</td>
 								<td th:text="${dto.cantidadRecibida}">[cant]</td>
 								<td th:text="${dto.precioProducto}">[money]</td>
 							</tr>
