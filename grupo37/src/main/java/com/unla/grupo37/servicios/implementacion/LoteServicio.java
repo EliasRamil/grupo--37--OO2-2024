@@ -96,6 +96,7 @@ public class LoteServicio implements ILoteServicio {
 		
 		for (Lote lot : lista) {
 			LoteDTO dto = mM.map(lot, LoteDTO.class);
+			dto.setNombreProveedor( lot.getPedido().getProveedor() );
 			listaDTO.add( dto );
 		}
 		

@@ -9,11 +9,12 @@ public class LoteDTO {
 	private int cantidadRecibida;
 	private long pedidoId;
 	private String nombreProducto;
+	private String nombreProveedor;
 	
 	public LoteDTO() {}
 
 	public LoteDTO(long id, LocalDateTime fechaRecepcion, double precioProducto, int cantidadRecibida, long pedidoId,
-			String nombreProducto) {
+			String nombreProducto, String nombreProveedor) {
 		super();
 		this.id = id;
 		this.fechaRecepcion = fechaRecepcion;
@@ -21,6 +22,15 @@ public class LoteDTO {
 		this.cantidadRecibida = cantidadRecibida;
 		this.pedidoId = pedidoId;
 		this.nombreProducto = nombreProducto;
+		this.nombreProveedor = nombreProveedor;
+	}
+
+	public String getNombreProveedor() {
+		return nombreProveedor;
+	}
+
+	public void setNombreProveedor(String nombreProveedor) {
+		this.nombreProveedor = nombreProveedor;
 	}
 
 	public long getId() {

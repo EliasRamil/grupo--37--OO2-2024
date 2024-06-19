@@ -20,5 +20,11 @@ public interface IProductoRepositorio extends JpaRepository<Producto, Long> {
 	
 	@Query("FROM Producto p WHERE p.nombre = :nombre")
 	public abstract Producto findProductoByNombre(@Param("nombre") String nombre);
+	
+	@Query("SELECT DISTINCT p FROM Producto p INNER JOIN FETCH p.compras c WHERE MONTH(c.fechaCompra) = :mes")
+	public abstract List<Producto> findProductosWithComprasByMes(@Param("mes") int mes);
 
+	@Query("SELECT DISTINCT p FROM Producto p INNER JOIN FETCH p.compras")
+	public abstract List<Producto> findProductosWithCompras();
+	
 }

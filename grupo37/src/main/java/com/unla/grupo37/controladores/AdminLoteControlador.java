@@ -47,15 +47,19 @@ public class AdminLoteControlador {
 	@GetMapping("")
     public ModelAndView lote() {
 		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
+		ModelAndView mav = null;
 		
-		if (!aux.equals("Ok")) return new ModelAndView(aux); // NUH UH
+		if (aux.equals("Ok")) {
+			mav = new ModelAndView(AyudanteRutasVistas.ADMIN_LOTE);
+			
+			//List<Pedido> listaPedidos = pedidoServicio.findAll();
+			List<PedidoDTO> listaPedidos = pedidoServicio.findAllSimple(true);
+			mav.addObject("pedidosDTO", listaPedidos);
+		} else {
+			mav = new ModelAndView(aux); // NUH UH
+		}
 		
-		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.ADMIN_LOTE);
-		//List<Pedido> listaPedidos = pedidoServicio.findAll();
-		List<PedidoDTO> listaPedidos = pedidoServicio.findAllSimple(true);
-		mAV.addObject("pedidosDTO", listaPedidos);
-		
-        return mAV;
+        return mav;
     }
 	
 	//public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
