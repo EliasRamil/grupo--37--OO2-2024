@@ -20,6 +20,7 @@ public class AyudanteRutasVistas {
 	public final static String ADMIN_INFORMES_INVENTARIO = "admin/informes/productos-inventario";
 	public final static String ADMIN_INFORMES_LOTES = "admin/informes/lotes";
 	public final static String ADMIN_INFORMES_CLIENTES = "admin/informes/rankingUsuario";
+	public final static String ADMIN_INFORMES_INDEX = "admin/informes/InicioInformes";
 	
 	//REDIRECCIONAR:
 	public final static String LOGIN_ROOT = "redirect:/login";
