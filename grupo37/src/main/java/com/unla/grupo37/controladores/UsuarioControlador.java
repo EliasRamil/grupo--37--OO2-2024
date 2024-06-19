@@ -58,19 +58,9 @@ public class UsuarioControlador {
 		UserDetails userDetails = uS.loadUserByUsername(request.getUserPrincipal().getName());
 		String r = AyudanteRutasVistas.LOGIN_ROOT;
 		
-		/*for(RolDeUsuario r: user.getRolesDeUsuario()) {
-			if(r.getRol().equals("ROL_USUARIO")) {
-				s = AyudanteRutasVistas.COMPRA_ROOT;
-			}else if(r.getRol().equals("ROL_ADMIN")){
-				s = AyudanteRutasVistas.ADMIN_ROOT;
-			}
-		}*/
-		
 		if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN"))) {
-            // Acciones específicas para el rol "ROLE_ADMIN"
         	r = AyudanteRutasVistas.ADMIN_ROOT;
         } else if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_USUARIO"))) {
-            // Acciones específicas para el rol "ROLE_USER"
         	r = AyudanteRutasVistas.COMPRA_ROOT;
         }
 		

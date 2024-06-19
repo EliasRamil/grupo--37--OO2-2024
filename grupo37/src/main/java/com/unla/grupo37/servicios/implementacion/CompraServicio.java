@@ -29,8 +29,7 @@ public class CompraServicio implements ICompraServicio {
 	@Transactional
 	public List<Compra> findAll(){
 		
-		List<Compra> entities= this.repositorioCompra.findAll();
-		return entities;
+		return this.repositorioCompra.findAll();
 		
 	}
 	
@@ -64,10 +63,10 @@ public class CompraServicio implements ICompraServicio {
 	@Transactional
 	public Compra updateOne(Compra entity, long id)throws Exception{
 		try {
-			Optional<Compra> opt= this.repositorioCompra.findById(id);
-			Compra compra= opt.get();
-			compra=this.repositorioCompra.save(entity);
-			return compra;
+			Compra aux = this.repositorioCompra.findById(id).orElse(null);
+			if (aux==null) throw new Exception("No existe Compra con ID " + id);
+			
+			return this.repositorioCompra.save(entity);
 		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}

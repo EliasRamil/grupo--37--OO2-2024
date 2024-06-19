@@ -39,10 +39,10 @@
 							<p class="card-text" th:text="${producto.descripcion}">Some quick example</p>
 							<p class="card-text">Precio: $ <span th:text="${producto.precio}"></span> </p>
 	
-							<label for="cantidad">En Stock ( <span th:text="${producto.cantidadActual}"></span> ):</label>
+							<label for="cantidad">En Stock: <span th:text="${producto.cantidadActual}"></span></label>
 	
 							<form th:action="@{'/compra/'+${producto.id}}" method="post">
-								<input type="number" name="cantidad" min="1" th:max="${producto.cantidadActual}" />
+								<input type="number" name="cantidad" min="1" th:max="${producto.cantidadActual}" required>
 								<button type="submit" value="value" class="btn btn-primary">Comprar</button>
 							</form>
 	

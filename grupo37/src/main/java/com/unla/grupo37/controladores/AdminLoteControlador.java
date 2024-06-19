@@ -14,14 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.grupo37.ayudante.AyudanteRutasVistas;
 import com.unla.grupo37.dtos.PedidoDTO;
-import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Lote;
 import com.unla.grupo37.entidades.Pedido;
-import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.servicios.ILoteServicio;
 import com.unla.grupo37.servicios.IPedidoServicio;
-import com.unla.grupo37.servicios.IProductoServicio;
-import com.unla.grupo37.servicios.IServicioGenerico;
 import com.unla.grupo37.servicios.IStockServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioRolServicio;
 import com.unla.grupo37.servicios.implementacion.UsuarioServicio;
@@ -32,7 +28,6 @@ public class AdminLoteControlador {
 	
 	private IPedidoServicio pedidoServicio;
 	private ILoteServicio loteServicio;
-	private UsuarioRolServicio usuarioRolServicio;
 	private UsuarioServicio u;
 	private IStockServicio stockServicio;
 	
@@ -40,7 +35,6 @@ public class AdminLoteControlador {
 		this.pedidoServicio = pedidoServicio;
 		this.loteServicio = loteServicio;
 		this.stockServicio = stockServicio;
-		this.usuarioRolServicio = usuarioRolServicio;
 		this.u = u;
 	}
 
@@ -66,14 +60,12 @@ public class AdminLoteControlador {
 	
 	@PostMapping("{id}")
 	public String procesarPedido(@PathVariable(value="id") String idStr, @RequestParam(name = "precio") String precioStr) throws Exception {
-		int idCliente = 0;
-
-	    // Obtener el nombre de usuario del usuario autenticado
+		// Obtener el nombre de usuario del usuario autenticado
 	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 	    if (principal instanceof UserDetails) {
 	        String username = ((UserDetails) principal).getUsername();
 	        
-	        idCliente = (u.traerUsuario(username)).getId();
+	        (u.traerUsuario(username)).getId();
 	    }
 	    
 	    int id = Integer.parseInt(idStr);

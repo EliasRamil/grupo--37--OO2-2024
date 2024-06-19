@@ -3,7 +3,6 @@ package com.unla.grupo37.servicios;
 import com.unla.grupo37.dtos.StockDTO;
 import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.entidades.Lote;
-import com.unla.grupo37.entidades.Stock;
 
 public interface IStockServicio extends IServicioGenerico<StockDTO> {
 	
