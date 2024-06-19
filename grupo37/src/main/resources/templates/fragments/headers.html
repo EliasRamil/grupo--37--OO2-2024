@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>UNLa</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/css/modern-business.css" rel="stylesheet" />
+  </head>
+  <body>
+	<!--
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" th:href="@{/compra}">TIENDA-CLIENTE</a>
+	  
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		
+	    <ul class="navbar-nav mr-auto">
+	    </ul>
+		
+		<form th:action="@{/logout}"  method="post">
+			<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
+		</form>
+	  </div>
+	</nav>
+	
+	<nav th:fragment="aaaaaaa" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="/">dd</a>
+			<button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"></button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/degrees/">Degrees</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownBlog">User</a>
+						<div aria-labelledby="navbarDropdownBlog" class="dropdown-menu dropdown-menu-right">
+							<form th:action="@{/logout}" method="post">
+								<input class="dropdown-item" style="cursor:pointer" type="submit" value="Logout" />
+							</form>
+							<a class="dropdown-item" href="example.html">Example</a>
+							<a class="dropdown-item" href="example2.html">Example 2</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		  <a class="navbar-brand" th:href="@{/admin}">INDEX-ADMIN</a>
+		  
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			
+		    <ul class="navbar-nav mr-auto">
+		    </ul>
+			
+			<form th:action="@{/logout}"  method="post">
+				<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
+			</form>
+		  </div>
+		</nav>
+	
+	<!-- Header generico para errores o cualquier otra cosa -->
+
+	<nav th:fragment="header-generic" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">INICIO</a>
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			
+	    	<ul class="navbar-nav mr-auto">
+			</ul>
+			
+			<form th:action="@{/logout}"  method="post">
+				<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
+			</form>
+		</div>
+	</nav>
+	
+	
+	
+	
+	<!-- Header para un usuario -->
+
+	<nav th:fragment="header-usuario" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/compra">INICIO-User</a>
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			
+	    	<ul class="navbar-nav mr-auto">
+	    	</ul>
+			
+			<form th:action="@{/logout}"  method="post">
+				<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
+			</form>
+		</div>
+	</nav>
+	
+	
+	
+	
+	<!-- Header para un admin -->
+
+	<nav th:fragment="header-admin" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/admin">INICIO-Admin</a>
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			
+	    	<ul class="navbar-nav mr-auto">
+	    	</ul>
+			
+			<form th:action="@{/logout}"  method="post">
+				<input class="btn btn-danger" style="color: white;"  type="submit" value="Logout" />
+			</form>
+		</div>
+	</nav>
+</body>
+</html>
