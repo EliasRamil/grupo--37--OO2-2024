@@ -41,14 +41,18 @@ public class AdminPedidoControlador {
 	@GetMapping("")
     public ModelAndView pedido() {
 		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
+		ModelAndView mav = null;
 		
-		if (!aux.equals("Ok")) return new ModelAndView(aux);
+		if (aux.equals("Ok")) {
+			mav = new ModelAndView(AyudanteRutasVistas.ADMIN_PEDIDO);
+			
+			List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
+			mav.addObject("productos", listaProductos);
+		} else {
+			mav = new ModelAndView(aux);
+		}
 		
-		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.ADMIN_PEDIDO);
-		List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
-		mAV.addObject("productos", listaProductos);
-		
-        return mAV;
+        return mav;
     }
 	@PostMapping("{id}")
 	public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
