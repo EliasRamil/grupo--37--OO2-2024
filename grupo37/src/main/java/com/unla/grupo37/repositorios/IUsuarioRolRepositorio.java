@@ -1,6 +1,7 @@
 package com.unla.grupo37.repositorios;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +17,8 @@ public interface IUsuarioRolRepositorio extends JpaRepository<Usuario, Serializa
 	
 	public abstract Usuario findById(@Param("idUsuario")int id);
 	
-	//por ahora seria un find by id porque solo se necesita traer para mostrar en la lista de compras realizadas
+	@Query("FROM Usuario u JOIN FETCH u.rolesDeUsuario r WHERE r.rol='ROL_USUARIO' ")
+	public abstract List<Usuario> findAllClientes();
 	
 
 	
