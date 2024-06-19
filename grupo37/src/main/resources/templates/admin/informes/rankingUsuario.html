@@ -47,7 +47,7 @@
 							<tr th:each="cliente : ${clientes}">
 								<td th:text="${cliente.id}"></td>
 								<td th:text="${cliente.nombreDeUsuario}"></td>
-								<td th:text="${cliente.gastoTotal}"></td>
+								<td th:text="${#numbers.formatDecimal(cliente.gastoTotal, 2, 2,'COMMA')}"></td>
 							</tr>
 	
 						</tbody>
