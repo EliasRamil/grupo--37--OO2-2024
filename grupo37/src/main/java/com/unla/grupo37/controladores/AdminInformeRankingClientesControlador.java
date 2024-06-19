@@ -1,5 +1,6 @@
 package com.unla.grupo37.controladores;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class AdminInformeRankingClientesControlador {
 			mav = new ModelAndView(AyudanteRutasVistas.ADMIN_INFORMES_CLIENTES);
 			
 			List<ClienteDTO> clientes = uRServ.getAllClientes();
+			clientes.sort(Comparator.comparingDouble(ClienteDTO::getGastoTotal).reversed());
+			
 			mav.addObject("clientes", clientes);
 			
 		}else {
