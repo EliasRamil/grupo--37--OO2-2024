@@ -46,7 +46,7 @@ public class AdminLoteControlador {
 
 	@GetMapping("")
     public ModelAndView lote() {
-		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_ADMIN");
 		ModelAndView mav = null;
 		
 		if (aux.equals("Ok")) {

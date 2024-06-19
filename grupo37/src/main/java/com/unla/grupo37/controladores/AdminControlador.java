@@ -16,7 +16,7 @@ public class AdminControlador {
 	//@GetMapping("")
 	@GetMapping(value={"", "index.html"})
 	public ModelAndView index() {
-		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_ADMIN");
 		
 		if(aux.equals("Ok"))
 			aux = AyudanteRutasVistas.ADMIN_INDEX;

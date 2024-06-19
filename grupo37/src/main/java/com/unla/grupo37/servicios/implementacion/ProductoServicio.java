@@ -65,9 +65,6 @@ public class ProductoServicio implements IProductoServicio {
 	public ProductoDTO saveOne(ProductoDTO dto) throws Exception {
 		ProductoDTO retorno = null;
 		
-		if(rP.findProductoByNombre(dto.getNombre()) != null)
-			throw new Exception("Ya existe un producto con el nombre" + dto.getNombre());
-		
 		try {
 			Producto p = mM.map(dto, Producto.class);
 			p.setStock(new Stock(dto.getCantidadActual(), dto.getCantidadCritica()));
@@ -76,32 +73,34 @@ public class ProductoServicio implements IProductoServicio {
 			retorno = mM.map(p, ProductoDTO.class);
 			retorno.setCantidadActual(p.getStock().getCantidadActual());
 			retorno.setCantidadCritica(p.getStock().getCantidadCritica());
-		} catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		
 		return retorno;
 	}
 
 	@Override
 	public ProductoDTO updateOne(ProductoDTO dto, long id) throws Exception {
-		Producto aux = rP.findProductoWithStockById(id);
+		ProductoDTO retorno = null;
+		Producto aux = rP.findProductoWithStockById(id);			
 		
-		if(rP.findProductoByNombre(dto.getNombre()).getId() != dto.getId())
-			throw new Exception("Ya existe otro producto con el nombre" + dto.getNombre());
-		
-		aux.setNombre(dto.getNombre());
-		aux.setActivo(dto.isActivo());
-		aux.setDescripcion(dto.getDescripcion());
-		aux.setPrecio(dto.getPrecio());
-		aux.getStock().setCantidadActual(dto.getCantidadActual());
-		aux.getStock().setCantidadCritica(dto.getCantidadCritica());
-		
-		rP.save(aux);
-		
-		ProductoDTO retorno = mM.map(aux, ProductoDTO.class);
-		retorno.setCantidadActual(aux.getStock().getCantidadActual());
-		retorno.setCantidadCritica(aux.getStock().getCantidadCritica());
+		try {
+			aux.setNombre(dto.getNombre());
+			aux.setActivo(dto.isActivo());
+			aux.setDescripcion(dto.getDescripcion());
+			aux.setPrecio(dto.getPrecio());
+			aux.getStock().setCantidadActual(dto.getCantidadActual());
+			aux.getStock().setCantidadCritica(dto.getCantidadCritica());
+			
+			rP.save(aux);
+			
+			retorno = mM.map(aux, ProductoDTO.class);
+			retorno.setCantidadActual(aux.getStock().getCantidadActual());
+			retorno.setCantidadCritica(aux.getStock().getCantidadCritica());
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		
 		return retorno;
 	}

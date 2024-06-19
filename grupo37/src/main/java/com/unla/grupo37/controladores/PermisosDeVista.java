@@ -13,12 +13,12 @@ public class PermisosDeVista {
 		return instancia;
 	}
 	
-	public String permisoVista() {
+	public String permisoVista(String rol) {
 		String r = com.unla.grupo37.ayudante.AyudanteRutasVistas.E_403;
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 	    if (principal instanceof UserDetails) {
-	        if(((UserDetails) principal).getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROL_ADMIN")))
+	        if(((UserDetails) principal).getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals(rol)))
 	        	r = "Ok";
 	    }
 		

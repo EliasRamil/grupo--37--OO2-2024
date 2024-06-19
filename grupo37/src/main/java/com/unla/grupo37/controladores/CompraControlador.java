@@ -38,9 +38,14 @@ public class CompraControlador {
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView(AyudanteRutasVistas.COMPRA_INDEX);
-		List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
-		mAV.addObject("productos", listaProductos);
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_USUARIO");
+		ModelAndView mAV = new ModelAndView(aux);
+		
+		if(aux.equals("Ok")) {
+			mAV.setViewName(com.unla.grupo37.ayudante.AyudanteRutasVistas.COMPRA_INDEX);
+			List<ProductoDTO> listaProductos= productoServicio.findAllbyActivo();
+			mAV.addObject("productos", listaProductos);
+		}	
 		
 		return mAV;
 	}

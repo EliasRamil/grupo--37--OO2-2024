@@ -25,7 +25,7 @@ public class AbmProductoControlador {
 	
 	@GetMapping("")
 	public ModelAndView opciones() {
-		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_ADMIN");
 		ModelAndView m = new ModelAndView(aux);
 		
 		if(aux.equals("Ok")) {
@@ -39,11 +39,15 @@ public class AbmProductoControlador {
 	
 	@GetMapping("/crear")
 	public ModelAndView crearGET() {
-		ModelAndView mav = new ModelAndView(com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ALTA);
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_ADMIN");
+		ModelAndView m = new ModelAndView(aux);
 		
-		mav.addObject("producto", new ProductoDTO());
+		if(aux.equals("Ok")){
+			m.setViewName(com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_ALTA);
+			m.addObject("producto", new ProductoDTO());
+		}
 
-		return mav;
+		return m;
 	}
 	
 	@PostMapping("/crear")
@@ -60,16 +64,23 @@ public class AbmProductoControlador {
 	
 	@GetMapping("/editar/{id}")
 	public ModelAndView actualizarGET(@PathVariable Long id) {
-		ModelAndView mav = new ModelAndView(com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_MODIFICACION);
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_ADMIN");
+		ModelAndView m = new ModelAndView(aux);
 		
-		try {
-			ProductoDTO p = pS.findById(id);
-			mav.addObject("producto", p);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		if(aux.equals("Ok")){
+			m.setViewName(com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_MODIFICACION);
+			m.addObject("producto", new ProductoDTO());
+			
+			try {
+				ProductoDTO p = pS.findById(id);
+				m.addObject("producto", p);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	
 
-		return mav;
+		return m;
 	}
 	
 	@PostMapping("/editar/{id}")

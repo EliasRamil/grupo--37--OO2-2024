@@ -32,7 +32,7 @@ public class AdminInformeLotesControlador {
 	//@GetMapping("")
 	@GetMapping("")
 	public ModelAndView informeLoteGET(@RequestParam(name="producto", required=false) String pdIDStr) {
-		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista();
+		String aux = com.unla.grupo37.controladores.PermisosDeVista.getInstancia().permisoVista("ROL_ADMIN");
 		
 		boolean conPermiso = aux.equals("Ok");
 		ModelAndView mav = null;
