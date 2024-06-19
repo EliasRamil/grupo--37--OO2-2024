@@ -44,10 +44,10 @@
                             <label>Descripcion : </label>
                             <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control" placeholder="ingrese una descripcion" required>
                         </div>
-                        <div class="form-group">
-                            <label>Precio : </label>
-                            <input type="number" name="precio" th:field="*{precio}" class="form-control" placeholder="ingrese el precio" required>
-                        </div>
+						<div class="form-group">
+							<label>Precio : </label>
+							<input type="number" name="precio" th:field="*{precio}" class="form-control" min="1" th:max="100000000" required>
+						 </div>
 						
 						<div class="form-group">
 							 <label>Cantidad actual : </label>
