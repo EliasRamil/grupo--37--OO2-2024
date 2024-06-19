@@ -39,13 +39,13 @@ public class UsuarioRolServicio{
 			
 			for(Compra compra: compras) {
 				total=total + compra.getTotal();
-				System.out.println(compra.getTotal());
+				
 			}
 			
 			ClienteDTO clientedto= mM.map(c, ClienteDTO.class);
 			clientedto.setGastoTotal(total);
 			clientesDto.add(clientedto);
-			System.out.println("total:" + total);
+			
 		}
 		
 		return clientesDto;
