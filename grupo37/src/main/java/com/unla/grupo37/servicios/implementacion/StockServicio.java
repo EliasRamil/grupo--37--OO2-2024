@@ -13,7 +13,6 @@ import com.unla.grupo37.entidades.Compra;
 import com.unla.grupo37.entidades.Lote;
 import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.IStockRepositorio;
-import com.unla.grupo37.servicios.IServicioGenerico;
 import com.unla.grupo37.servicios.IStockServicio;
 
 @Service

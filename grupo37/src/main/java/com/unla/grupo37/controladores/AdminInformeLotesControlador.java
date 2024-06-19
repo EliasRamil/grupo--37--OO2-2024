@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +13,6 @@ import com.unla.grupo37.dtos.LoteDTO;
 import com.unla.grupo37.dtos.ProductoDTO;
 import com.unla.grupo37.entidades.Producto;
 import com.unla.grupo37.servicios.ILoteServicio;
-import com.unla.grupo37.servicios.IPedidoServicio;
 import com.unla.grupo37.servicios.IProductoServicio;
 
 @Controller
@@ -51,7 +49,6 @@ public class AdminInformeLotesControlador {
 					pdID = Integer.parseInt(pdIDStr);
 					pd = productoServicio.findByIdProducto(pdID);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

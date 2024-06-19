@@ -12,13 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.unla.grupo37.dtos.LoteDTO;
 import com.unla.grupo37.entidades.Lote;
 import com.unla.grupo37.entidades.Pedido;
-import com.unla.grupo37.entidades.Producto;
-import com.unla.grupo37.entidades.Stock;
 import com.unla.grupo37.repositorios.ILoteRepositorio;
-import com.unla.grupo37.repositorios.IPedidoRepositorio;
 import com.unla.grupo37.servicios.ILoteServicio;
-import com.unla.grupo37.servicios.IPedidoServicio;
-import com.unla.grupo37.servicios.IServicioGenerico;
 
 @Service
 @Transactional
@@ -119,11 +114,8 @@ public class LoteServicio implements ILoteServicio {
 		lot.setCantidadRecibida(pd.getCantidadPedida());
 		lot.setProducto(pd.getProducto());
 		lot.setPrecioProducto(precio);
-		lot = r.save(lot);
 		
-		// TODO modificar stock eventualmente
-		
-		return lot;
+		return r.save(lot);
 	}
 	
 }

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo37.entidades.Pedido;
-import com.unla.grupo37.entidades.Producto;
 
 @Repository
 public interface IPedidoRepositorio extends JpaRepository<Pedido, Long> {
