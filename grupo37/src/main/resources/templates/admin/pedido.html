@@ -40,8 +40,8 @@
 							<label for="cantidad">Stock actual: <span th:text="${producto.cantidadActual}"></span></label>
 	
 							<form th:action="@{'/admin/pedido/'+${producto.id}}" method="post">
-								<p>Cantidad: <input type="number" name="cantidad" min="1" max="500"/> </p>
-                                <p>Proveedor:  <input name="proveedor" type="text"/> </p> 
+								<p>Cantidad: <input type="number" name="cantidad" min="1" max="500" required> </p>
+                                <p>Proveedor:  <input name="proveedor" type="text" required> </p> 
 								<button type="submit" value="value" class="btn btn-primary">Realizar pedido</button>
 							</form>
 	

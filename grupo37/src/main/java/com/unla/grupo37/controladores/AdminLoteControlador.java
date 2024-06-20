@@ -46,7 +46,6 @@ public class AdminLoteControlador {
 		if (aux.equals("Ok")) {
 			mav = new ModelAndView(AyudanteRutasVistas.ADMIN_LOTE);
 			
-			//List<Pedido> listaPedidos = pedidoServicio.findAll();
 			List<PedidoDTO> listaPedidos = pedidoServicio.findAllSimple(true);
 			mav.addObject("pedidosDTO", listaPedidos);
 		} else {
@@ -56,17 +55,8 @@ public class AdminLoteControlador {
         return mav;
     }
 	
-	//public ModelAndView realizarPedido(@RequestParam String cantidad, @RequestParam String proveedor, @PathVariable(value="id") String id) throws Exception {
-	
 	@PostMapping("{id}")
 	public String procesarPedido(@PathVariable(value="id") String idStr, @RequestParam(name = "precio") String precioStr) throws Exception {
-		// Obtener el nombre de usuario del usuario autenticado
-	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-	    if (principal instanceof UserDetails) {
-	        String username = ((UserDetails) principal).getUsername();
-	        
-	        (u.traerUsuario(username)).getId();
-	    }
 	    
 	    int id = Integer.parseInt(idStr);
 	    double precio = Double.parseDouble(precioStr);
@@ -76,13 +66,6 @@ public class AdminLoteControlador {
 	    
 	    Lote lot = loteServicio.nuevoLoteDesdePedido(pd, precio);
 	    stockServicio.actualizarStock(lot);
-	    
-	    //pd.setProcesado(true);
-	    //pedidoServicio.updateOne(pd, idInt);
-	    
-	    //Pedido pedido = new Pedido(proveedor, Integer.parseInt(cantidad), productoServicio.findByIdProducto(Integer.parseInt(id)),
-		//usuarioRolServicio.getClienteById(idCliente), null);
-	    //pedidoServicio.saveOne(pedido);
 		
 		return com.unla.grupo37.ayudante.AyudanteRutasVistas.ADMIN_LOTE_ROOT;
 	}

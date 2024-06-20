@@ -68,6 +68,6 @@ public class AdminPedidoControlador {
 		usuarioRolServicio.getClienteById(idCliente), null);
 	    pedidoServicio.saveOne(pedido);
 		
-		return pedido(); // ;)
+		return pedido();
 	}
 }

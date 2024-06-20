@@ -70,44 +70,6 @@
 					</table>
 				
 				</div>
-				
-				
-				<!--
-				<div class="container text-center">
-					<table class="table">
-						
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">ID Pedido</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Cantidad</th>
-								<th scope="col">Proveedor</th>
-								<th scope="col">Admin</th>
-								<th scope="col">Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="dto : ${pedidosDTO}">
-								<td th:text="${dto.id}">[ID]</td>
-								<td th:text="${dto.nombreProducto}">[prod]</td>
-								<td th:text="${dto.cantidadPedida}">[cant]</td>
-								<td th:text="${dto.proveedor}">[prov]</td>
-								<td th:text="${dto.nombreAdmin}">[admin]</td>
-								<td style="vertical-align: middle;">
-									<form th:action="@{'/admin/lote/'+${dto.id}}" method="post">
-										
-										<button type="submit" value="process" class="btn btn-primary">Crear lote?</button>
-										<input type="number" name="precio" placeholder="Precio unitario" required>
-									</form>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<span th:if="${#lists.isEmpty(pedidosDTO)} == true">No hay pedidos pendientes.</span>
-					
-				</div>
-				-->
 			</div>
 		</div>
 		
